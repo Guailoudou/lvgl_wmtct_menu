@@ -448,6 +448,28 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_align(ui_BillItemAddLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_BillItemAddLabel, "+");
 
+    ui_OutLoginBtn = lv_btn_create(ui_MenuView);
+    lv_obj_set_width(ui_OutLoginBtn, 113);
+    lv_obj_set_height(ui_OutLoginBtn, 50);
+    lv_obj_set_x(ui_OutLoginBtn, 11);
+    lv_obj_set_y(ui_OutLoginBtn, 4);
+    lv_obj_add_flag(ui_OutLoginBtn, LV_OBJ_FLAG_FLOATING | LV_OBJ_FLAG_OVERFLOW_VISIBLE |
+                    LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_OutLoginBtn, LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_OutLoginBtn, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_OutLoginBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(ui_OutLoginBtn, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(ui_OutLoginBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_OutLoginText = lv_label_create(ui_OutLoginBtn);
+    lv_obj_set_width(ui_OutLoginText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_OutLoginText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_OutLoginText, LV_ALIGN_LEFT_MID);
+    lv_label_set_text(ui_OutLoginText, "< 退出登录   当前用户: userdd");
+    lv_obj_set_style_text_color(ui_OutLoginText, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_OutLoginText, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_OutLoginText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_menuButton1, ui_event_menuButton1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton2, ui_event_menuButton2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton3, ui_event_menuButton3, LV_EVENT_ALL, NULL);
@@ -456,6 +478,7 @@ void ui_MenuView_screen_init(void)
     lv_obj_add_event_cb(ui_menuButton6, ui_event_menuButton6, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton7, ui_event_menuButton7, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton8, ui_event_menuButton8, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_OutLoginBtn, ui_event_OutLoginBtn, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_MenuView, ui_event_MenuView, LV_EVENT_ALL, NULL);
 
 }

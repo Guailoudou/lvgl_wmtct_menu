@@ -17,6 +17,32 @@ extern "C" {
 
 void board_Animation(lv_obj_t * TargetObject, int delay);
 void boardbay_Animation(lv_obj_t * TargetObject, int delay);
+// SCREEN: ui_LoginView
+void ui_LoginView_screen_init(void);
+void ui_event_LoginView(lv_event_t * e);
+extern lv_obj_t * ui_LoginView;
+void ui_event_Keyboard1(lv_event_t * e);
+extern lv_obj_t * ui_Keyboard1;
+extern lv_obj_t * ui_LoginBlock;
+extern lv_obj_t * ui_LoginHead;
+extern lv_obj_t * ui_loginTitleText;
+extern lv_obj_t * ui_usernameText;
+void ui_event_inusername(lv_event_t * e);
+extern lv_obj_t * ui_inusername;
+extern lv_obj_t * ui_passwordText;
+void ui_event_inpassword(lv_event_t * e);
+extern lv_obj_t * ui_inpassword;
+extern lv_obj_t * ui_topasswordText;
+void ui_event_intopassword(lv_event_t * e);
+extern lv_obj_t * ui_intopassword;
+extern lv_obj_t * ui_Container3;
+void ui_event_RegButton(lv_event_t * e);
+extern lv_obj_t * ui_RegButton;
+extern lv_obj_t * ui_Label1;
+extern lv_obj_t * ui_AIR001;
+void ui_event_LoginButton(lv_event_t * e);
+extern lv_obj_t * ui_LoginButton;
+extern lv_obj_t * ui_Label4;
 // SCREEN: ui_MenuView
 void ui_MenuView_screen_init(void);
 void ui_event_MenuView(lv_event_t * e);
@@ -83,41 +109,18 @@ extern lv_obj_t * ui_BillItemNum;
 extern lv_obj_t * ui_BillItemAdd;
 extern lv_obj_t * ui_BillItemUid12;
 extern lv_obj_t * ui_BillItemAddLabel;
-// SCREEN: ui_LoginView
-void ui_LoginView_screen_init(void);
-void ui_event_LoginView(lv_event_t * e);
-extern lv_obj_t * ui_LoginView;
-void ui_event_Keyboard1(lv_event_t * e);
-extern lv_obj_t * ui_Keyboard1;
-extern lv_obj_t * ui_LoginBlock;
-extern lv_obj_t * ui_LoginHead;
-extern lv_obj_t * ui_loginTitleText;
-extern lv_obj_t * ui_usernameText;
-void ui_event_inusername(lv_event_t * e);
-extern lv_obj_t * ui_inusername;
-extern lv_obj_t * ui_passwordText;
-void ui_event_inpassword(lv_event_t * e);
-extern lv_obj_t * ui_inpassword;
-extern lv_obj_t * ui_topasswordText;
-void ui_event_intopassword(lv_event_t * e);
-extern lv_obj_t * ui_intopassword;
-extern lv_obj_t * ui_Container3;
-void ui_event_RegButton(lv_event_t * e);
-extern lv_obj_t * ui_RegButton;
-extern lv_obj_t * ui_Label1;
-extern lv_obj_t * ui_AIR001;
-void ui_event_LoginButton(lv_event_t * e);
-extern lv_obj_t * ui_LoginButton;
-extern lv_obj_t * ui_Label4;
+void ui_event_OutLoginBtn(lv_event_t * e);
+extern lv_obj_t * ui_OutLoginBtn;
+extern lv_obj_t * ui_OutLoginText;
 // SCREEN: ui_Screen2
 void ui_Screen2_screen_init(void);
 extern lv_obj_t * ui_Screen2;
 extern lv_obj_t * ui____initial_actions0;
 
 
+LV_IMG_DECLARE(ui_img_ylnimg_png);    // assets/ylnimg.png
 LV_IMG_DECLARE(ui_img_1371183408);    // assets/背景.png
 LV_IMG_DECLARE(ui_img_xtq_img_png);    // assets/xtq_img.png
-LV_IMG_DECLARE(ui_img_ylnimg_png);    // assets/ylnimg.png
 
 
 

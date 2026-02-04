@@ -11,6 +11,34 @@ void board_Animation(lv_obj_t * TargetObject, int delay);
 void boardbay_Animation(lv_obj_t * TargetObject, int delay);
 
 
+// SCREEN: ui_LoginView
+void ui_LoginView_screen_init(void);
+void ui_event_LoginView(lv_event_t * e);
+lv_obj_t * ui_LoginView;
+void ui_event_Keyboard1(lv_event_t * e);
+lv_obj_t * ui_Keyboard1;
+lv_obj_t * ui_LoginBlock;
+lv_obj_t * ui_LoginHead;
+lv_obj_t * ui_loginTitleText;
+lv_obj_t * ui_usernameText;
+void ui_event_inusername(lv_event_t * e);
+lv_obj_t * ui_inusername;
+lv_obj_t * ui_passwordText;
+void ui_event_inpassword(lv_event_t * e);
+lv_obj_t * ui_inpassword;
+lv_obj_t * ui_topasswordText;
+void ui_event_intopassword(lv_event_t * e);
+lv_obj_t * ui_intopassword;
+lv_obj_t * ui_Container3;
+void ui_event_RegButton(lv_event_t * e);
+lv_obj_t * ui_RegButton;
+lv_obj_t * ui_Label1;
+lv_obj_t * ui_AIR001;
+void ui_event_LoginButton(lv_event_t * e);
+lv_obj_t * ui_LoginButton;
+lv_obj_t * ui_Label4;
+
+
 // SCREEN: ui_MenuView
 void ui_MenuView_screen_init(void);
 void ui_event_MenuView(lv_event_t * e);
@@ -77,34 +105,9 @@ lv_obj_t * ui_BillItemNum;
 lv_obj_t * ui_BillItemAdd;
 lv_obj_t * ui_BillItemUid12;
 lv_obj_t * ui_BillItemAddLabel;
-
-
-// SCREEN: ui_LoginView
-void ui_LoginView_screen_init(void);
-void ui_event_LoginView(lv_event_t * e);
-lv_obj_t * ui_LoginView;
-void ui_event_Keyboard1(lv_event_t * e);
-lv_obj_t * ui_Keyboard1;
-lv_obj_t * ui_LoginBlock;
-lv_obj_t * ui_LoginHead;
-lv_obj_t * ui_loginTitleText;
-lv_obj_t * ui_usernameText;
-void ui_event_inusername(lv_event_t * e);
-lv_obj_t * ui_inusername;
-lv_obj_t * ui_passwordText;
-void ui_event_inpassword(lv_event_t * e);
-lv_obj_t * ui_inpassword;
-lv_obj_t * ui_topasswordText;
-void ui_event_intopassword(lv_event_t * e);
-lv_obj_t * ui_intopassword;
-lv_obj_t * ui_Container3;
-void ui_event_RegButton(lv_event_t * e);
-lv_obj_t * ui_RegButton;
-lv_obj_t * ui_Label1;
-lv_obj_t * ui_AIR001;
-void ui_event_LoginButton(lv_event_t * e);
-lv_obj_t * ui_LoginButton;
-lv_obj_t * ui_Label4;
+void ui_event_OutLoginBtn(lv_event_t * e);
+lv_obj_t * ui_OutLoginBtn;
+lv_obj_t * ui_OutLoginText;
 
 
 // SCREEN: ui_Screen2
@@ -155,7 +158,7 @@ void boardbay_Animation(lv_obj_t * TargetObject, int delay)
     lv_anim_set_user_data(&PropertyAnimation_0, PropertyAnimation_0_user_data);
     lv_anim_set_custom_exec_cb(&PropertyAnimation_0, _ui_anim_callback_set_y);
     lv_anim_set_values(&PropertyAnimation_0, -500, 0);
-    lv_anim_set_path_cb(&PropertyAnimation_0, lv_anim_path_overshoot);
+    lv_anim_set_path_cb(&PropertyAnimation_0, lv_anim_path_linear);
     lv_anim_set_delay(&PropertyAnimation_0, delay + 0);
     lv_anim_set_deleted_cb(&PropertyAnimation_0, _ui_anim_callback_free_user_data);
     lv_anim_set_playback_time(&PropertyAnimation_0, 0);
@@ -169,6 +172,81 @@ void boardbay_Animation(lv_obj_t * TargetObject, int delay)
 }
 
 ///////////////////// FUNCTIONS ////////////////////
+void ui_event_LoginView(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
+        lv_indev_wait_release(lv_indev_get_act());
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+        _ui_screen_change(&ui_MenuView, LV_SCR_LOAD_ANIM_OVER_LEFT, 500, 0, &ui_MenuView_screen_init);
+    }
+    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM) {
+        lv_indev_wait_release(lv_indev_get_act());
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+    }
+}
+void ui_event_Keyboard1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_READY) {
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+    }
+    if(event_code == LV_EVENT_CANCEL) {
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+    }
+}
+void ui_event_inusername(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_keyboard_set_target(ui_Keyboard1,  ui_inusername);
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        set_kbindex_ev(e);
+    }
+}
+void ui_event_inpassword(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_keyboard_set_target(ui_Keyboard1,  ui_inpassword);
+        set_kbindex_ev(e);
+    }
+}
+void ui_event_intopassword(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_keyboard_set_target(ui_Keyboard1,  ui_intopassword);
+        set_kbindex_ev(e);
+    }
+}
+void ui_event_RegButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_PRESSED) {
+        reg_ac_ev(e);
+        _ui_flag_modify(ui_intopassword, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_topasswordText, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+    }
+}
+void ui_event_LoginButton(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        login_ac_ev(e);
+        _ui_flag_modify(ui_intopassword, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+        _ui_flag_modify(ui_topasswordText, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+    }
+}
 void ui_event_MenuView(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -259,79 +337,13 @@ void ui_event_menuButton8(lv_event_t * e)
         viewAddChopp(e);
     }
 }
-void ui_event_LoginView(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
-        lv_indev_wait_release(lv_indev_get_act());
-        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-        _ui_screen_change(&ui_MenuView, LV_SCR_LOAD_ANIM_OVER_LEFT, 500, 0, &ui_MenuView_screen_init);
-    }
-    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM) {
-        lv_indev_wait_release(lv_indev_get_act());
-        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-    }
-}
-void ui_event_Keyboard1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_READY) {
-        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-    }
-    if(event_code == LV_EVENT_CANCEL) {
-        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-    }
-}
-void ui_event_inusername(lv_event_t * e)
+void ui_event_OutLoginBtn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
-        _ui_keyboard_set_target(ui_Keyboard1,  ui_inusername);
-        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-        set_kbindex_ev(e);
-    }
-}
-void ui_event_inpassword(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-        _ui_keyboard_set_target(ui_Keyboard1,  ui_inpassword);
-        set_kbindex_ev(e);
-    }
-}
-void ui_event_intopassword(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_flag_modify(ui_Keyboard1, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-        _ui_keyboard_set_target(ui_Keyboard1,  ui_intopassword);
-        set_kbindex_ev(e);
-    }
-}
-void ui_event_RegButton(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_PRESSED) {
-        reg_ac_ev(e);
-        _ui_flag_modify(ui_intopassword, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-        _ui_flag_modify(ui_topasswordText, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-    }
-}
-void ui_event_LoginButton(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_CLICKED) {
-        login_ac_ev(e);
-        _ui_flag_modify(ui_intopassword, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-        _ui_flag_modify(ui_topasswordText, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+        viewOutLogin(e);
+        _ui_screen_change(&ui_LoginView, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_LoginView_screen_init);
     }
 }
 
@@ -343,9 +355,9 @@ void ui_init(void)
     lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
                                                false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    ui_MenuView_screen_init();
     ui_LoginView_screen_init();
+    ui_MenuView_screen_init();
     ui_Screen2_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
-    lv_disp_load_scr(ui_MenuView);
+    lv_disp_load_scr(ui_LoginView);
 }

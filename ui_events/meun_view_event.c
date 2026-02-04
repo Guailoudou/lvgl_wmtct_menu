@@ -3,16 +3,24 @@
 #include "OrderDishesApi.h"
 #include <stdio.h>
 int pages = 1;
+extern userInfo loginUser;
 void viewClearChopp(lv_event_t * e);
 void viewAddChopp(lv_event_t * e);
 void initMeun(int tpages)
 {
-    char buf[20] = {0};
-    getMenuList(buf,tpages,1);
+    char buf[30] = {0};
+    
+    strcat(buf,"< 退出登录 当前用户: ");
+    strcat(buf,loginUser.name);
+    lv_label_set_text(ui_OutLoginText, buf);
+    memset(buf, 0, sizeof(buf));
+    printf("权限等级: %d\n",loginUser.type);
+    getMenuList(buf,tpages,loginUser.type);
     lv_label_set_text(ui_PagesInfo, buf);
     sscanf(buf,"%d",&pages);
     printf("外部页:%d\n",pages);
     memset(buf, 0, sizeof(buf));
+
     if(menuData[0].uid != -1){
         lv_obj_clear_flag(ui_meunItem1,LV_OBJ_FLAG_HIDDEN);
         lv_img_set_src(ui_meunimg1, menuData[0].imgPath);
@@ -218,7 +226,11 @@ void viewLaftPage(lv_event_t * e)
 void viewMenuInit(lv_event_t * e)
 {
     printf("初始化\n");
+    pages = 1;
+    board.len = 0;
     initMeun(pages);
+    _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  526);
+    forDillItem();
 }
 int forDillItem(){  //渲染菜版返回总金额
     int coinNum=0;
