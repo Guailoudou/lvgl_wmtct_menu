@@ -10,6 +10,10 @@
 extern "C" {
 #endif
 #include "ui.h"
+void viewNextPage(lv_event_t * e);
+void viewLaftPage(lv_event_t * e);
+void viewMenuInit(lv_event_t * e);
+void viewAddChopp(lv_event_t * e);
 void set_kbindex_ev(lv_event_t * e);
 void reg_ac_ev(lv_event_t * e);
 void login_ac_ev(lv_event_t * e);

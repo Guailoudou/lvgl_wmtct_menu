@@ -15,13 +15,128 @@ extern "C" {
 #include "ui_helpers.h"
 #include "ui_events.h"
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-void ui_event_Screen1(lv_event_t * e);
-extern lv_obj_t * ui_Screen1;
+void board_Animation(lv_obj_t * TargetObject, int delay);
+void boardbay_Animation(lv_obj_t * TargetObject, int delay);
+void menu_Animation(lv_obj_t * TargetObject, int delay);
+// SCREEN: ui_MenuView
+void ui_MenuView_screen_init(void);
+void ui_event_MenuView(lv_event_t * e);
+extern lv_obj_t * ui_MenuView;
+extern lv_obj_t * ui_Menu;
+extern lv_obj_t * ui_meunItem1;
+void ui_event_meunimg1(lv_event_t * e);
+extern lv_obj_t * ui_meunimg1;
+extern lv_obj_t * ui_meuntext1;
+extern lv_obj_t * ui_meunItem2;
+extern lv_obj_t * ui_meunimg2;
+extern lv_obj_t * ui_meuntext2;
+extern lv_obj_t * ui_meunItem3;
+extern lv_obj_t * ui_meunimg3;
+extern lv_obj_t * ui_meuntext3;
+extern lv_obj_t * ui_meunItem4;
+extern lv_obj_t * ui_meunimg4;
+extern lv_obj_t * ui_meuntext4;
+extern lv_obj_t * ui_meunItem5;
+extern lv_obj_t * ui_meunimg5;
+extern lv_obj_t * ui_meuntext5;
+extern lv_obj_t * ui_meunItem6;
+extern lv_obj_t * ui_meunimg6;
+extern lv_obj_t * ui_meuntext6;
+extern lv_obj_t * ui_meunItem7;
+extern lv_obj_t * ui_meunimg7;
+extern lv_obj_t * ui_meuntext7;
+extern lv_obj_t * ui_meunItem8;
+extern lv_obj_t * ui_meunimg8;
+extern lv_obj_t * ui_meuntext8;
+extern lv_obj_t * ui_Bill;
+extern lv_obj_t * ui_Container1;
+extern lv_obj_t * ui_Container4;
+extern lv_obj_t * ui_Label2;
+extern lv_obj_t * ui_Container5;
+extern lv_obj_t * ui_Button1;
+extern lv_obj_t * ui_Label5;
+extern lv_obj_t * ui_Label3;
+extern lv_obj_t * ui_Button2;
+extern lv_obj_t * ui_Label6;
+extern lv_obj_t * ui_Container8;
+extern lv_obj_t * ui_Container2;
+extern lv_obj_t * ui_Label11;
+extern lv_obj_t * ui_Container6;
+extern lv_obj_t * ui_Button5;
+extern lv_obj_t * ui_Label7;
+extern lv_obj_t * ui_Label8;
+extern lv_obj_t * ui_Button3;
+extern lv_obj_t * ui_Label9;
+extern lv_obj_t * ui_Container11;
+extern lv_obj_t * ui_Container7;
+extern lv_obj_t * ui_Label15;
+extern lv_obj_t * ui_Container9;
+extern lv_obj_t * ui_Button7;
+extern lv_obj_t * ui_Label10;
+extern lv_obj_t * ui_Label12;
+extern lv_obj_t * ui_Button4;
+extern lv_obj_t * ui_Label13;
+extern lv_obj_t * ui_Container12;
+extern lv_obj_t * ui_Container13;
+extern lv_obj_t * ui_Label16;
+extern lv_obj_t * ui_Container14;
+extern lv_obj_t * ui_Button8;
+extern lv_obj_t * ui_Label17;
+extern lv_obj_t * ui_Label18;
+extern lv_obj_t * ui_Button9;
+extern lv_obj_t * ui_Label19;
+extern lv_obj_t * ui_Container15;
+extern lv_obj_t * ui_Container16;
+extern lv_obj_t * ui_Label20;
+extern lv_obj_t * ui_Container17;
+extern lv_obj_t * ui_Button10;
+extern lv_obj_t * ui_Label21;
+extern lv_obj_t * ui_Label22;
+extern lv_obj_t * ui_Button11;
+extern lv_obj_t * ui_Label23;
+extern lv_obj_t * ui_Container18;
+extern lv_obj_t * ui_Container19;
+extern lv_obj_t * ui_Label24;
+extern lv_obj_t * ui_Container20;
+extern lv_obj_t * ui_Button12;
+extern lv_obj_t * ui_Label25;
+extern lv_obj_t * ui_Label26;
+extern lv_obj_t * ui_Button13;
+extern lv_obj_t * ui_Label27;
+extern lv_obj_t * ui_Container21;
+extern lv_obj_t * ui_Container22;
+extern lv_obj_t * ui_Label28;
+extern lv_obj_t * ui_Container23;
+extern lv_obj_t * ui_Button14;
+extern lv_obj_t * ui_Label29;
+extern lv_obj_t * ui_Label30;
+extern lv_obj_t * ui_Button15;
+extern lv_obj_t * ui_Label31;
+extern lv_obj_t * ui_Container24;
+extern lv_obj_t * ui_Container25;
+extern lv_obj_t * ui_Label32;
+extern lv_obj_t * ui_Container26;
+extern lv_obj_t * ui_Button16;
+extern lv_obj_t * ui_Label33;
+extern lv_obj_t * ui_Label34;
+extern lv_obj_t * ui_Button17;
+extern lv_obj_t * ui_Label35;
+extern lv_obj_t * ui_Container27;
+extern lv_obj_t * ui_Container28;
+extern lv_obj_t * ui_Label36;
+extern lv_obj_t * ui_Container29;
+extern lv_obj_t * ui_Button18;
+extern lv_obj_t * ui_Label37;
+extern lv_obj_t * ui_Label38;
+extern lv_obj_t * ui_Button19;
+extern lv_obj_t * ui_Label39;
+// SCREEN: ui_LoginView
+void ui_LoginView_screen_init(void);
+void ui_event_LoginView(lv_event_t * e);
+extern lv_obj_t * ui_LoginView;
 void ui_event_Keyboard1(lv_event_t * e);
 extern lv_obj_t * ui_Keyboard1;
-extern lv_obj_t * ui_LoginView;
+extern lv_obj_t * ui_LoginBlock;
 extern lv_obj_t * ui_LoginHead;
 extern lv_obj_t * ui_loginTitleText;
 extern lv_obj_t * ui_usernameText;
@@ -44,14 +159,11 @@ extern lv_obj_t * ui_Label4;
 // SCREEN: ui_Screen2
 void ui_Screen2_screen_init(void);
 extern lv_obj_t * ui_Screen2;
-// SCREEN: ui_Screen3
-void ui_Screen3_screen_init(void);
-void ui_event_Screen3(lv_event_t * e);
-extern lv_obj_t * ui_Screen3;
-extern lv_obj_t * ui_Label2;
 extern lv_obj_t * ui____initial_actions0;
 
 
+LV_IMG_DECLARE(ui_img_1371183408);    // assets/背景.png
+LV_IMG_DECLARE(ui_img_xtq_img_png);    // assets/xtq_img.png
 LV_IMG_DECLARE(ui_img_ylnimg_png);    // assets/ylnimg.png
 
 
