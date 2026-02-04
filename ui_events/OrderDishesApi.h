@@ -10,6 +10,7 @@
 #endif
 extern Dlist dishesHead; //全部菜品数据
 extern dishesItem menuData[8];
+extern ChoppBoard board; //点菜板
 extern int maxpages;
 extern bool isEnd;
 

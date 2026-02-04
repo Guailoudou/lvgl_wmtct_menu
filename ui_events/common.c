@@ -1,6 +1,7 @@
 #include "common.h"
 //////////////菜单////////////////
 Dlist dishesHead = NULL; //全部菜品数据
+ChoppBoard board = {.len=0};
 dishesItem menuData[8]={0};
 int maxpages = 0;
 bool isEnd = false;

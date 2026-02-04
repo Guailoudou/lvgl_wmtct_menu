@@ -75,17 +75,35 @@ void getMenuList(int pages,int type) //写入menuData
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
+bool addChoppBoard(int dishesUid,bool isplus)
+{
+    for(int i=0;i<board.len;i++){
+        if(board.dishesUids[i].dishesUids==dishesUid){
+            if(isplus)board.dishesUids[i].num++;
+            else board.dishesUids[i].num--;
+            if(board.dishesUids[i].num<=0){
+                rmChoppBoard(dishesUid);
+            }
+        }
+    }
+    board.dishesUids[board.len].dishesUids = dishesUid;
+    board.dishesUids[board.len++].num = 1;
+    return true;
+}
+bool rmChoppBoard(int dishesUid)
+{
+    for(int i=0;i<board.len;i++){
+        if(board.dishesUids[i].dishesUids==dishesUid){
+            for(int j=i+1;j<=board.len;j++){
+                board.dishesUids[j-1].dishesUids=board.dishesUids[j].dishesUids;
+                board.dishesUids[j-1].num=board.dishesUids[j].num;
+            }
+            board.len--;
+            return true;
+        }
+    }
+    return false;
+}
 
 
 

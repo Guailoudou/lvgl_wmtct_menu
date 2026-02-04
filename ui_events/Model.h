@@ -14,9 +14,8 @@ typedef struct ChoppItem //点菜板单品
 
 typedef struct ChoppBoard //点菜板
 {
-    int userUid;    //使用用户的uid
     ChoppItem dishesUids[STRLEN]; //菜品uid表
-
+    int len; //种类数量
 }ChoppBoard;
 
 typedef struct dishesItem   //单个菜
