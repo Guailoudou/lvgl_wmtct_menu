@@ -97,6 +97,7 @@ bool addChoppBoard(int dishesUid,bool isplus)
             if(board.dishesUids[i].num<=0){
                 rmChoppBoard(dishesUid);
             }
+            return true;
         }
     }
     board.dishesUids[board.len].dishesUids = dishesUid;

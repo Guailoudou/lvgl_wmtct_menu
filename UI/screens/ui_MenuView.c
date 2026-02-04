@@ -372,6 +372,7 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_align(ui_Container1, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Container1, LV_FLEX_FLOW_ROW);
     lv_obj_set_flex_align(ui_Container1, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Container1, LV_OBJ_FLAG_HIDDEN);     /// Flags
     lv_obj_clear_flag(ui_Container1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     ui_Container4 = lv_obj_create(ui_Container1);
@@ -383,13 +384,13 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_flex_align(ui_Container4, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Container4, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_Label2 = lv_label_create(ui_Container4);
-    lv_obj_set_width(ui_Label2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label2, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label2, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label2, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_BillItemName = lv_label_create(ui_Container4);
+    lv_obj_set_width(ui_BillItemName, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_BillItemName, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_BillItemName, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_BillItemName, "仙跳墙");
+    lv_obj_set_style_text_align(ui_BillItemName, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_BillItemName, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Container5 = lv_obj_create(ui_Container1);
     lv_obj_remove_style_all(ui_Container5);
@@ -400,582 +401,52 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_flex_align(ui_Container5, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Container5, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_Button1 = lv_btn_create(ui_Container5);
-    lv_obj_set_width(ui_Button1, 40);
-    lv_obj_set_height(ui_Button1, 40);
-    lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label5 = lv_label_create(ui_Button1);
-    lv_obj_set_width(ui_Label5, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label5, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label5, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label5, "-");
-
-    ui_Label3 = lv_label_create(ui_Container5);
-    lv_obj_set_width(ui_Label3, 25);
-    lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label3, "1");
-    lv_obj_set_style_text_align(ui_Label3, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button2 = lv_btn_create(ui_Container5);
-    lv_obj_set_width(ui_Button2, 40);
-    lv_obj_set_height(ui_Button2, 40);
-    lv_obj_set_align(ui_Button2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button2, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label6 = lv_label_create(ui_Button2);
-    lv_obj_set_width(ui_Label6, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label6, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label6, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label6, "+");
-
-    ui_Container8 = lv_obj_create(ui_Bill);
-    lv_obj_remove_style_all(ui_Container8);
-    lv_obj_set_width(ui_Container8, 327);
-    lv_obj_set_height(ui_Container8, 54);
-    lv_obj_set_align(ui_Container8, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container8, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container8, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container8, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Container2 = lv_obj_create(ui_Container8);
-    lv_obj_remove_style_all(ui_Container2);
-    lv_obj_set_width(ui_Container2, 208);
-    lv_obj_set_height(ui_Container2, 50);
-    lv_obj_set_align(ui_Container2, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container2, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container2, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label11 = lv_label_create(ui_Container2);
-    lv_obj_set_width(ui_Label11, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label11, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label11, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label11, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label11, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label11, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Container6 = lv_obj_create(ui_Container8);
-    lv_obj_remove_style_all(ui_Container6);
-    lv_obj_set_width(ui_Container6, 121);
-    lv_obj_set_height(ui_Container6, 50);
-    lv_obj_set_align(ui_Container6, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container6, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container6, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container6, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button5 = lv_btn_create(ui_Container6);
-    lv_obj_set_width(ui_Button5, 40);
-    lv_obj_set_height(ui_Button5, 40);
-    lv_obj_set_align(ui_Button5, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button5, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button5, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label7 = lv_label_create(ui_Button5);
-    lv_obj_set_width(ui_Label7, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label7, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label7, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label7, "-");
-
-    ui_Label8 = lv_label_create(ui_Container6);
-    lv_obj_set_width(ui_Label8, 25);
-    lv_obj_set_height(ui_Label8, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label8, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label8, "1");
-    lv_obj_set_style_text_align(ui_Label8, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button3 = lv_btn_create(ui_Container6);
-    lv_obj_set_width(ui_Button3, 40);
-    lv_obj_set_height(ui_Button3, 40);
-    lv_obj_set_align(ui_Button3, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button3, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label9 = lv_label_create(ui_Button3);
-    lv_obj_set_width(ui_Label9, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label9, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label9, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label9, "+");
-
-    ui_Container11 = lv_obj_create(ui_Bill);
-    lv_obj_remove_style_all(ui_Container11);
-    lv_obj_set_width(ui_Container11, 327);
-    lv_obj_set_height(ui_Container11, 54);
-    lv_obj_set_align(ui_Container11, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container11, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container11, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container11, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Container7 = lv_obj_create(ui_Container11);
-    lv_obj_remove_style_all(ui_Container7);
-    lv_obj_set_width(ui_Container7, 208);
-    lv_obj_set_height(ui_Container7, 50);
-    lv_obj_set_align(ui_Container7, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container7, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container7, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container7, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label15 = lv_label_create(ui_Container7);
-    lv_obj_set_width(ui_Label15, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label15, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label15, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label15, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label15, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label15, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Container9 = lv_obj_create(ui_Container11);
-    lv_obj_remove_style_all(ui_Container9);
-    lv_obj_set_width(ui_Container9, 121);
-    lv_obj_set_height(ui_Container9, 50);
-    lv_obj_set_align(ui_Container9, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container9, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container9, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container9, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button7 = lv_btn_create(ui_Container9);
-    lv_obj_set_width(ui_Button7, 40);
-    lv_obj_set_height(ui_Button7, 40);
-    lv_obj_set_align(ui_Button7, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button7, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button7, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label10 = lv_label_create(ui_Button7);
-    lv_obj_set_width(ui_Label10, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label10, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label10, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label10, "-");
-
-    ui_Label12 = lv_label_create(ui_Container9);
-    lv_obj_set_width(ui_Label12, 25);
-    lv_obj_set_height(ui_Label12, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label12, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label12, "1");
-    lv_obj_set_style_text_align(ui_Label12, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button4 = lv_btn_create(ui_Container9);
-    lv_obj_set_width(ui_Button4, 40);
-    lv_obj_set_height(ui_Button4, 40);
-    lv_obj_set_align(ui_Button4, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button4, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button4, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label13 = lv_label_create(ui_Button4);
-    lv_obj_set_width(ui_Label13, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label13, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label13, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label13, "+");
-
-    ui_Container12 = lv_obj_create(ui_Bill);
-    lv_obj_remove_style_all(ui_Container12);
-    lv_obj_set_width(ui_Container12, 327);
-    lv_obj_set_height(ui_Container12, 54);
-    lv_obj_set_align(ui_Container12, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container12, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container12, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container12, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Container13 = lv_obj_create(ui_Container12);
-    lv_obj_remove_style_all(ui_Container13);
-    lv_obj_set_width(ui_Container13, 208);
-    lv_obj_set_height(ui_Container13, 50);
-    lv_obj_set_align(ui_Container13, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container13, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container13, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container13, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label16 = lv_label_create(ui_Container13);
-    lv_obj_set_width(ui_Label16, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label16, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label16, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label16, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label16, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label16, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Container14 = lv_obj_create(ui_Container12);
-    lv_obj_remove_style_all(ui_Container14);
-    lv_obj_set_width(ui_Container14, 121);
-    lv_obj_set_height(ui_Container14, 50);
-    lv_obj_set_align(ui_Container14, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container14, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container14, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container14, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button8 = lv_btn_create(ui_Container14);
-    lv_obj_set_width(ui_Button8, 40);
-    lv_obj_set_height(ui_Button8, 40);
-    lv_obj_set_align(ui_Button8, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button8, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button8, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label17 = lv_label_create(ui_Button8);
-    lv_obj_set_width(ui_Label17, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label17, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label17, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label17, "-");
-
-    ui_Label18 = lv_label_create(ui_Container14);
-    lv_obj_set_width(ui_Label18, 25);
-    lv_obj_set_height(ui_Label18, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label18, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label18, "1");
-    lv_obj_set_style_text_align(ui_Label18, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button9 = lv_btn_create(ui_Container14);
-    lv_obj_set_width(ui_Button9, 40);
-    lv_obj_set_height(ui_Button9, 40);
-    lv_obj_set_align(ui_Button9, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button9, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button9, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label19 = lv_label_create(ui_Button9);
-    lv_obj_set_width(ui_Label19, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label19, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label19, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label19, "+");
-
-    ui_Container15 = lv_obj_create(ui_Bill);
-    lv_obj_remove_style_all(ui_Container15);
-    lv_obj_set_width(ui_Container15, 327);
-    lv_obj_set_height(ui_Container15, 54);
-    lv_obj_set_align(ui_Container15, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container15, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container15, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container15, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Container16 = lv_obj_create(ui_Container15);
-    lv_obj_remove_style_all(ui_Container16);
-    lv_obj_set_width(ui_Container16, 208);
-    lv_obj_set_height(ui_Container16, 50);
-    lv_obj_set_align(ui_Container16, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container16, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container16, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container16, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label20 = lv_label_create(ui_Container16);
-    lv_obj_set_width(ui_Label20, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label20, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label20, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label20, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label20, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label20, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Container17 = lv_obj_create(ui_Container15);
-    lv_obj_remove_style_all(ui_Container17);
-    lv_obj_set_width(ui_Container17, 121);
-    lv_obj_set_height(ui_Container17, 50);
-    lv_obj_set_align(ui_Container17, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container17, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container17, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container17, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button10 = lv_btn_create(ui_Container17);
-    lv_obj_set_width(ui_Button10, 40);
-    lv_obj_set_height(ui_Button10, 40);
-    lv_obj_set_align(ui_Button10, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button10, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button10, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label21 = lv_label_create(ui_Button10);
-    lv_obj_set_width(ui_Label21, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label21, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label21, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label21, "-");
-
-    ui_Label22 = lv_label_create(ui_Container17);
-    lv_obj_set_width(ui_Label22, 25);
-    lv_obj_set_height(ui_Label22, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label22, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label22, "1");
-    lv_obj_set_style_text_align(ui_Label22, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button11 = lv_btn_create(ui_Container17);
-    lv_obj_set_width(ui_Button11, 40);
-    lv_obj_set_height(ui_Button11, 40);
-    lv_obj_set_align(ui_Button11, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button11, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button11, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label23 = lv_label_create(ui_Button11);
-    lv_obj_set_width(ui_Label23, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label23, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label23, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label23, "+");
-
-    ui_Container18 = lv_obj_create(ui_Bill);
-    lv_obj_remove_style_all(ui_Container18);
-    lv_obj_set_width(ui_Container18, 327);
-    lv_obj_set_height(ui_Container18, 54);
-    lv_obj_set_align(ui_Container18, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container18, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container18, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container18, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Container19 = lv_obj_create(ui_Container18);
-    lv_obj_remove_style_all(ui_Container19);
-    lv_obj_set_width(ui_Container19, 208);
-    lv_obj_set_height(ui_Container19, 50);
-    lv_obj_set_align(ui_Container19, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container19, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container19, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container19, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label24 = lv_label_create(ui_Container19);
-    lv_obj_set_width(ui_Label24, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label24, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label24, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label24, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label24, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label24, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Container20 = lv_obj_create(ui_Container18);
-    lv_obj_remove_style_all(ui_Container20);
-    lv_obj_set_width(ui_Container20, 121);
-    lv_obj_set_height(ui_Container20, 50);
-    lv_obj_set_align(ui_Container20, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container20, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container20, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container20, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button12 = lv_btn_create(ui_Container20);
-    lv_obj_set_width(ui_Button12, 40);
-    lv_obj_set_height(ui_Button12, 40);
-    lv_obj_set_align(ui_Button12, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button12, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button12, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label25 = lv_label_create(ui_Button12);
-    lv_obj_set_width(ui_Label25, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label25, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label25, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label25, "-");
-
-    ui_Label26 = lv_label_create(ui_Container20);
-    lv_obj_set_width(ui_Label26, 25);
-    lv_obj_set_height(ui_Label26, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label26, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label26, "1");
-    lv_obj_set_style_text_align(ui_Label26, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button13 = lv_btn_create(ui_Container20);
-    lv_obj_set_width(ui_Button13, 40);
-    lv_obj_set_height(ui_Button13, 40);
-    lv_obj_set_align(ui_Button13, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button13, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button13, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label27 = lv_label_create(ui_Button13);
-    lv_obj_set_width(ui_Label27, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label27, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label27, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label27, "+");
-
-    ui_Container21 = lv_obj_create(ui_Bill);
-    lv_obj_remove_style_all(ui_Container21);
-    lv_obj_set_width(ui_Container21, 327);
-    lv_obj_set_height(ui_Container21, 54);
-    lv_obj_set_align(ui_Container21, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container21, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container21, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container21, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Container22 = lv_obj_create(ui_Container21);
-    lv_obj_remove_style_all(ui_Container22);
-    lv_obj_set_width(ui_Container22, 208);
-    lv_obj_set_height(ui_Container22, 50);
-    lv_obj_set_align(ui_Container22, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container22, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container22, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container22, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label28 = lv_label_create(ui_Container22);
-    lv_obj_set_width(ui_Label28, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label28, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label28, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label28, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label28, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label28, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Container23 = lv_obj_create(ui_Container21);
-    lv_obj_remove_style_all(ui_Container23);
-    lv_obj_set_width(ui_Container23, 121);
-    lv_obj_set_height(ui_Container23, 50);
-    lv_obj_set_align(ui_Container23, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container23, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container23, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container23, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button14 = lv_btn_create(ui_Container23);
-    lv_obj_set_width(ui_Button14, 40);
-    lv_obj_set_height(ui_Button14, 40);
-    lv_obj_set_align(ui_Button14, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button14, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button14, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label29 = lv_label_create(ui_Button14);
-    lv_obj_set_width(ui_Label29, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label29, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label29, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label29, "-");
-
-    ui_Label30 = lv_label_create(ui_Container23);
-    lv_obj_set_width(ui_Label30, 25);
-    lv_obj_set_height(ui_Label30, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label30, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label30, "1");
-    lv_obj_set_style_text_align(ui_Label30, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button15 = lv_btn_create(ui_Container23);
-    lv_obj_set_width(ui_Button15, 40);
-    lv_obj_set_height(ui_Button15, 40);
-    lv_obj_set_align(ui_Button15, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button15, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button15, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label31 = lv_label_create(ui_Button15);
-    lv_obj_set_width(ui_Label31, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label31, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label31, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label31, "+");
-
-    ui_Container24 = lv_obj_create(ui_Bill);
-    lv_obj_remove_style_all(ui_Container24);
-    lv_obj_set_width(ui_Container24, 327);
-    lv_obj_set_height(ui_Container24, 54);
-    lv_obj_set_align(ui_Container24, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container24, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container24, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container24, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Container25 = lv_obj_create(ui_Container24);
-    lv_obj_remove_style_all(ui_Container25);
-    lv_obj_set_width(ui_Container25, 208);
-    lv_obj_set_height(ui_Container25, 50);
-    lv_obj_set_align(ui_Container25, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container25, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container25, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container25, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label32 = lv_label_create(ui_Container25);
-    lv_obj_set_width(ui_Label32, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label32, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label32, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label32, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label32, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label32, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Container26 = lv_obj_create(ui_Container24);
-    lv_obj_remove_style_all(ui_Container26);
-    lv_obj_set_width(ui_Container26, 121);
-    lv_obj_set_height(ui_Container26, 50);
-    lv_obj_set_align(ui_Container26, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container26, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container26, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container26, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button16 = lv_btn_create(ui_Container26);
-    lv_obj_set_width(ui_Button16, 40);
-    lv_obj_set_height(ui_Button16, 40);
-    lv_obj_set_align(ui_Button16, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button16, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button16, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label33 = lv_label_create(ui_Button16);
-    lv_obj_set_width(ui_Label33, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label33, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label33, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label33, "-");
-
-    ui_Label34 = lv_label_create(ui_Container26);
-    lv_obj_set_width(ui_Label34, 25);
-    lv_obj_set_height(ui_Label34, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label34, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label34, "1");
-    lv_obj_set_style_text_align(ui_Label34, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button17 = lv_btn_create(ui_Container26);
-    lv_obj_set_width(ui_Button17, 40);
-    lv_obj_set_height(ui_Button17, 40);
-    lv_obj_set_align(ui_Button17, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button17, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button17, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label35 = lv_label_create(ui_Button17);
-    lv_obj_set_width(ui_Label35, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label35, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label35, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label35, "+");
-
-    ui_Container27 = lv_obj_create(ui_Bill);
-    lv_obj_remove_style_all(ui_Container27);
-    lv_obj_set_width(ui_Container27, 327);
-    lv_obj_set_height(ui_Container27, 54);
-    lv_obj_set_align(ui_Container27, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container27, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container27, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container27, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Container28 = lv_obj_create(ui_Container27);
-    lv_obj_remove_style_all(ui_Container28);
-    lv_obj_set_width(ui_Container28, 208);
-    lv_obj_set_height(ui_Container28, 50);
-    lv_obj_set_align(ui_Container28, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container28, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container28, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container28, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label36 = lv_label_create(ui_Container28);
-    lv_obj_set_width(ui_Label36, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label36, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label36, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label36, "仙跳墙");
-    lv_obj_set_style_text_align(ui_Label36, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Label36, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Container29 = lv_obj_create(ui_Container27);
-    lv_obj_remove_style_all(ui_Container29);
-    lv_obj_set_width(ui_Container29, 121);
-    lv_obj_set_height(ui_Container29, 50);
-    lv_obj_set_align(ui_Container29, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Container29, LV_FLEX_FLOW_ROW);
-    lv_obj_set_flex_align(ui_Container29, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Container29, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Button18 = lv_btn_create(ui_Container29);
-    lv_obj_set_width(ui_Button18, 40);
-    lv_obj_set_height(ui_Button18, 40);
-    lv_obj_set_align(ui_Button18, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button18, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button18, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label37 = lv_label_create(ui_Button18);
-    lv_obj_set_width(ui_Label37, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label37, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label37, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label37, "-");
-
-    ui_Label38 = lv_label_create(ui_Container29);
-    lv_obj_set_width(ui_Label38, 25);
-    lv_obj_set_height(ui_Label38, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label38, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label38, "1");
-    lv_obj_set_style_text_align(ui_Label38, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Button19 = lv_btn_create(ui_Container29);
-    lv_obj_set_width(ui_Button19, 40);
-    lv_obj_set_height(ui_Button19, 40);
-    lv_obj_set_align(ui_Button19, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Button19, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button19, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label39 = lv_label_create(ui_Button19);
-    lv_obj_set_width(ui_Label39, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label39, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label39, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label39, "+");
+    ui_BillItemClear = lv_btn_create(ui_Container5);
+    lv_obj_set_width(ui_BillItemClear, 40);
+    lv_obj_set_height(ui_BillItemClear, 40);
+    lv_obj_set_align(ui_BillItemClear, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_BillItemClear, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_BillItemClear, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_BillItemUid11 = lv_label_create(ui_BillItemClear);
+    lv_obj_set_width(ui_BillItemUid11, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_BillItemUid11, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_BillItemUid11, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_BillItemUid11, "1");
+    lv_obj_add_flag(ui_BillItemUid11, LV_OBJ_FLAG_HIDDEN);     /// Flags
+
+    ui_BillItemClearLabel = lv_label_create(ui_BillItemClear);
+    lv_obj_set_width(ui_BillItemClearLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_BillItemClearLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_BillItemClearLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_BillItemClearLabel, "-");
+
+    ui_BillItemNum = lv_label_create(ui_Container5);
+    lv_obj_set_width(ui_BillItemNum, 25);
+    lv_obj_set_height(ui_BillItemNum, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_BillItemNum, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_BillItemNum, "1");
+    lv_obj_set_style_text_align(ui_BillItemNum, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_BillItemAdd = lv_btn_create(ui_Container5);
+    lv_obj_set_width(ui_BillItemAdd, 40);
+    lv_obj_set_height(ui_BillItemAdd, 40);
+    lv_obj_set_align(ui_BillItemAdd, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_BillItemAdd, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_BillItemAdd, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_BillItemUid12 = lv_label_create(ui_BillItemAdd);
+    lv_obj_set_width(ui_BillItemUid12, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_BillItemUid12, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_BillItemUid12, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_BillItemUid12, "1");
+    lv_obj_add_flag(ui_BillItemUid12, LV_OBJ_FLAG_HIDDEN);     /// Flags
+
+    ui_BillItemAddLabel = lv_label_create(ui_BillItemAdd);
+    lv_obj_set_width(ui_BillItemAddLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_BillItemAddLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_BillItemAddLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_BillItemAddLabel, "+");
 
     lv_obj_add_event_cb(ui_menuButton1, ui_event_menuButton1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton2, ui_event_menuButton2, LV_EVENT_ALL, NULL);
