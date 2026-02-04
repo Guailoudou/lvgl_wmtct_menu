@@ -356,8 +356,8 @@ void ui_MenuView_screen_init(void)
     ui_Bill = lv_obj_create(ui_MenuView);
     lv_obj_set_width(ui_Bill, 372);
     lv_obj_set_height(ui_Bill, 501);
-    lv_obj_set_x(ui_Bill, 294);
-    lv_obj_set_y(ui_Bill, 526);
+    lv_obj_set_x(ui_Bill, 291);
+    lv_obj_set_y(ui_Bill, 39);
     lv_obj_set_align(ui_Bill, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Bill, LV_FLEX_FLOW_COLUMN);
     lv_obj_set_flex_align(ui_Bill, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
@@ -372,7 +372,6 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_align(ui_Container1, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Container1, LV_FLEX_FLOW_ROW);
     lv_obj_set_flex_align(ui_Container1, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Container1, LV_OBJ_FLAG_HIDDEN);     /// Flags
     lv_obj_clear_flag(ui_Container1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     ui_Container4 = lv_obj_create(ui_Container1);
@@ -447,6 +446,53 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_height(ui_BillItemAddLabel, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_BillItemAddLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_BillItemAddLabel, "+");
+
+    ui_Container2 = lv_obj_create(ui_Bill);
+    lv_obj_remove_style_all(ui_Container2);
+    lv_obj_set_width(ui_Container2, 327);
+    lv_obj_set_height(ui_Container2, 54);
+    lv_obj_set_align(ui_Container2, LV_ALIGN_CENTER);
+    lv_obj_set_flex_flow(ui_Container2, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(ui_Container2, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Container2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_Container7 = lv_obj_create(ui_Container2);
+    lv_obj_remove_style_all(ui_Container7);
+    lv_obj_set_width(ui_Container7, 208);
+    lv_obj_set_height(ui_Container7, 50);
+    lv_obj_set_align(ui_Container7, LV_ALIGN_CENTER);
+    lv_obj_set_flex_flow(ui_Container7, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(ui_Container7, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Container7, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_coinText = lv_label_create(ui_Container7);
+    lv_obj_set_width(ui_coinText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_coinText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_coinText, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_coinText, "总金额: ");
+    lv_obj_set_style_text_font(ui_coinText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_coinMun = lv_label_create(ui_Container7);
+    lv_obj_set_width(ui_coinMun, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_coinMun, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_coinMun, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_coinMun, "1124");
+    lv_obj_set_style_text_align(ui_coinMun, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_coinMun, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_coinBtn = lv_btn_create(ui_Container2);
+    lv_obj_set_width(ui_coinBtn, 100);
+    lv_obj_set_height(ui_coinBtn, 50);
+    lv_obj_set_align(ui_coinBtn, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_coinBtn, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_coinBtn, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_coinBtnText = lv_label_create(ui_coinBtn);
+    lv_obj_set_width(ui_coinBtnText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_coinBtnText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_coinBtnText, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_coinBtnText, "结算");
+    lv_obj_set_style_text_font(ui_coinBtnText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_OutLoginBtn = lv_btn_create(ui_MenuView);
     lv_obj_set_width(ui_OutLoginBtn, 113);

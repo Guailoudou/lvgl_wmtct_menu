@@ -6,6 +6,8 @@ int pages = 1;
 extern userInfo loginUser;
 void viewClearChopp(lv_event_t * e);
 void viewAddChopp(lv_event_t * e);
+void checkoutChopp(lv_event_t * e);
+//生成菜单元件
 void initMeun(int tpages)
 {
     char buf[30] = {0};
@@ -119,6 +121,61 @@ void initMeun(int tpages)
         lv_obj_add_flag(ui_meunItem8,LV_OBJ_FLAG_HIDDEN);
     }
 }
+//创建结算元件
+void createCoinMunItem(int num)
+{
+    lv_obj_t *temp_Container2 = lv_obj_create(ui_Bill);
+    lv_obj_remove_style_all(temp_Container2);
+    lv_obj_set_width(temp_Container2, 327);
+    lv_obj_set_height(temp_Container2, 54);
+    lv_obj_set_align(temp_Container2, LV_ALIGN_CENTER);
+    lv_obj_set_flex_flow(temp_Container2, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(temp_Container2, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+    lv_obj_clear_flag(temp_Container2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    lv_obj_t *temp_Container7 = lv_obj_create(temp_Container2);
+    lv_obj_remove_style_all(temp_Container7);
+    lv_obj_set_width(temp_Container7, 208);
+    lv_obj_set_height(temp_Container7, 50);
+    lv_obj_set_align(temp_Container7, LV_ALIGN_CENTER);
+    lv_obj_set_flex_flow(temp_Container7, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(temp_Container7, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+    lv_obj_clear_flag(temp_Container7, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    lv_obj_t *temp_coinText = lv_label_create(temp_Container7);
+    lv_obj_set_width(temp_coinText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(temp_coinText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(temp_coinText, LV_ALIGN_CENTER);
+    lv_label_set_text(temp_coinText, "总金额: ");
+    lv_obj_set_style_text_font(temp_coinText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_t *temp_coinMun = lv_label_create(temp_Container7);
+    lv_obj_set_width(temp_coinMun, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(temp_coinMun, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(temp_coinMun, LV_ALIGN_CENTER);
+    char buf[20] = {0};
+    sprintf(buf,"%d",num);
+    lv_label_set_text(temp_coinMun, buf);
+    lv_obj_set_style_text_align(temp_coinMun, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(temp_coinMun, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_t *temp_coinBtn = lv_btn_create(temp_Container2);
+    lv_obj_set_width(temp_coinBtn, 100);
+    lv_obj_set_height(temp_coinBtn, 50);
+    lv_obj_set_align(temp_coinBtn, LV_ALIGN_CENTER);
+    lv_obj_add_flag(temp_coinBtn, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(temp_coinBtn, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    lv_obj_add_event_cb(temp_coinBtn,checkoutChopp,LV_EVENT_ALL, NULL);
+
+    lv_obj_t *temp_coinBtnText = lv_label_create(temp_coinBtn);
+    lv_obj_set_width(temp_coinBtnText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(temp_coinBtnText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(temp_coinBtnText, LV_ALIGN_CENTER);
+    lv_label_set_text(temp_coinBtnText, "结算");
+    lv_obj_set_style_text_font(temp_coinBtnText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+}
+//创建账单元件
 void createBillItem(char *name,int num,int uid)
 {
     char buf[10] = {0};
@@ -223,14 +280,15 @@ void viewLaftPage(lv_event_t * e)
     printf("上一页\n");
     initMeun(--pages);
 }
+//页面初始化
 void viewMenuInit(lv_event_t * e)
 {
     printf("初始化\n");
     pages = 1;
     board.len = 0;
+    forDillItem();
     initMeun(pages);
     _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  526);
-    forDillItem();
 }
 int forDillItem(){  //渲染菜版返回总金额
     int coinNum=0;
@@ -243,6 +301,7 @@ int forDillItem(){  //渲染菜版返回总金额
         coinNum += data.peice * num;
         createBillItem(data.name,num,uid);
     }
+    createCoinMunItem(coinNum);
     printf("当前总金额：%d\n",coinNum);
     return coinNum;
 }
@@ -294,3 +353,16 @@ void viewClearChopp(lv_event_t * e)
     }
     forDillItem();
 }
+//结账
+void checkoutChopp(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code != LV_EVENT_CLICKED)return;
+    //付钱ing....
+    printf("付款了\x58");
+    //清空菜板
+    board.len = 0;
+    forDillItem();
+}
+
