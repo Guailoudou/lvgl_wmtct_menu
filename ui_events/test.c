@@ -21,8 +21,10 @@
 // int main(){
 //     // userInfo info = utest();
 //     // printf("%d\n",info.type);
+
 //     // getMenuList(2,1);
 //     // displaymenuData();
+
 //     if(regMenu("user","123")){
 //         printf("uid: %d\n",loginMenu("user","123"));
 //     }else{

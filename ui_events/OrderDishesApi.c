@@ -5,6 +5,7 @@ static void readtxt(){
     if(dishesHead==NULL){
         dishesHead = create_head();
     }
+    // FILE *fp = openfile(USERINFOFILE,"r");
     FILE *fp = openfile(USERINFOFILE,"r");
     char buf[100] = {0};
     int i = 0;
@@ -47,17 +48,26 @@ static void writetxt(){
 }
 
 ////////////////////////API/////////////////////
-void getMenuList(int pages,int type) //写入menuData
+char *getMenuList(char pagestr[],int pages,int type) //写入menuData
 {
     if(dishesHead==NULL)readtxt();
-    int len = getListLen(dishesHead);
-    maxpages = len/8 + len%8==0?0:1;
+    int len = getListLen(dishesHead,type);
+    maxpages = (len/8) + (len%8==0?0:1);
     if(pages>=maxpages)isEnd=true;  //判断末页
+    if(pages<=0)pages=maxpages; //循环翻页
+    pages %= maxpages+1; 
+    if(pages<=0)pages=1;
+    char buf[20];
+    printf("len=%d,maxp=%d,np=%d\n",len,maxpages,pages);
+    sprintf(buf,"%d/%d",pages,maxpages);
+    strcpy(pagestr,buf);
     int head = (pages-1)*8;
     
     Dlist p=NULL,n=NULL;
     int i=0,data_i=0;
-
+    for(int i=0;i<8;i++){
+        menuData[i].uid = -1;
+    }
     list_for_each_entry_safe(p,n,&(dishesHead->my),my)
     {   
         
@@ -68,11 +78,14 @@ void getMenuList(int pages,int type) //写入menuData
         }
         if(p->data.data.type<=type){
             menuData[data_i++] = p->data.data;
+            printf("%s ",p->data.data.name);
         }
         if(data_i==8){
             break;
         }
     }
+    printf("\n");
+    return pagestr;
 }
 
 bool addChoppBoard(int dishesUid,bool isplus)
@@ -151,15 +164,17 @@ static DishesData create_data(int uid,char imgPath[],char name[],int peice,int t
     return data;
 }
 
-static int getListLen(Dlist head)
+static int getListLen(Dlist head,int type)
 {
     Dlist p=NULL,n=NULL;
     int len=0;
     //从头结点到末尾进行遍历  安全遍历
     list_for_each_entry_safe(p,n,&(head->my),my)
     {
-        len++;
+        if(p->data.data.type<=type)
+            len++;
     }
+    return len;
 }
 static int getMaxUid(Dlist head)
 {

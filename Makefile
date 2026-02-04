@@ -29,7 +29,7 @@ bindir 			?= $(prefix)/bin
 #Collect the files to compile
 MAINSRC = 		./main.c #./mywin.c
 # MAINSRC += 		./work/login.c ./work/common.c ./work/loginapi.c ./work/reg.c
-MAINSRC += 		$(LVGL_DIR)/UI/ui.c $(LVGL_DIR)/UI/ui_helpers.c $(LVGL_DIR)/UI/ui_events.c
+MAINSRC += 		$(LVGL_DIR)/UI/ui.c $(LVGL_DIR)/UI/ui_helpers.c #$(LVGL_DIR)/UI/ui_events.c
 MAINSRC += 		$(shell find $(LVGL_DIR)/UI/screens -name "*.c")
 MAINSRC += 		$(shell find $(LVGL_DIR)/UI/components -name "*.c")
 MAINSRC += 		$(shell find $(LVGL_DIR)/UI/images -name "*.c")
@@ -95,7 +95,7 @@ fileso: $(NTARGET_SO)
 	adb shell rm -f /lib/$(NFILEBIN)
 	adb push /home/loudou/file/yue/out/$(NFILEBIN) /lib
 sendfile:
-	adb push /home/loudou/file/yue/in/files /userdata/files
+	adb push /home/loudou/file/yue/in/files /userdata
 getUI:
 	rm -rf UI
 	cp -r /mnt/UI UI

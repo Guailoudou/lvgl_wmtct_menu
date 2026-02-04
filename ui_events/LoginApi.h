@@ -10,7 +10,7 @@ extern userInfo loginUser;
 #ifdef DEBUG
 #define USERINFOFILE "/home/loudou/file/yue/in/files/userInfo.txt"
 #else
-#define USERINFOFILE "/userdata/file/userInfo.txt"
+#define USERINFOFILE "/userdata/files/userInfo.txt"
 #endif
 
 static void readtxt();//读取数据
