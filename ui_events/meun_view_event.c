@@ -8,6 +8,7 @@ extern userInfo loginUser;
 void viewClearChopp(lv_event_t * e);
 void viewAddChopp(lv_event_t * e);
 void checkoutChopp(lv_event_t * e);
+void forDillItem();
 //生成菜单元件
 void initMeun(int tpages)
 {
@@ -292,7 +293,7 @@ void viewMenuInit(lv_event_t * e)
     initMeun(pages);
     _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  526);
 }
-int forDillItem(){  //渲染菜版返回总金额
+void forDillItem(){  //渲染菜版返回总金额
     int len = board.len;
     lv_obj_clean(ui_Bill);
     for(int i=0;i<len;i++){
@@ -304,7 +305,7 @@ int forDillItem(){  //渲染菜版返回总金额
     }
     createCoinMunItem(coinNum);
     printf("当前总金额：%d\n",coinNum);
-    return coinNum;
+    return;
 }
 void viewAddChopp(lv_event_t * e)
 {
@@ -361,12 +362,17 @@ void checkoutChopp(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code != LV_EVENT_CLICKED)return;
     //付钱ing....
-    char buf[50] = {0};
+    printf("付款开始！\n");
+    ///////
+    char buf[100] = {0};
     sprintf(buf,"总共消费 %d\n",coinNum);
     strcat(buf,"付款成功！老板欢迎下次再来！");
-    lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", buf, NULL, true);
-    lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
-    lv_obj_center(mbox1);
+    printf("提示：%s\n",buf);
+    lv_obj_t *mbox11 = lv_msgbox_create(NULL, "提示", buf, NULL, true);
+    printf("设置字体\n");
+    lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
+    lv_obj_center(mbox11);
+
     //清空菜板
     board.len = 0;
     coinNum = 0;
