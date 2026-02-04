@@ -41,7 +41,7 @@ void reg_ac_ev(lv_event_t * e)
             lv_obj_center(mbox1);
             return;
         }
-        if(regAPI(user,pass)){
+        if(regMenu(user,pass)){
             printf("注册成功！");
             lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "注册成功！", NULL, true);
             lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
@@ -77,7 +77,7 @@ void login_ac_ev(lv_event_t * e)
             lv_obj_center(mbox1);
             return;
         }
-        if(checkloginAPI(user,pass)){
+        if(loginMenu(user,pass)!=-1){
             printf("登录成功！");
             lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "登录成功！", NULL, true);
             lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);

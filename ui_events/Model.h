@@ -4,7 +4,7 @@
 #define STRLEN 1024
 #define USERSTR 24
 #include <stdbool.h>
-#include "dlist.h"
+#include "list.h"
 typedef struct ChoppItem //点菜板单品
 {
     int dishesUids; //菜品uid

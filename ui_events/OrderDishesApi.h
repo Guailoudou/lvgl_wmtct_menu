@@ -16,7 +16,7 @@ extern bool isEnd;
 
 void getMenuList(int pages,int type);//写入menuData
 dishesItem getDishesInfo(int uid); //获取菜品数据
-
+bool rmChoppBoard(int dishesUid);
 static Dlist create_head();
 static Dlist create_node(DishesData data);
 static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type);

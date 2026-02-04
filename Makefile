@@ -12,7 +12,7 @@ LVGL_DIR 		?= .
 # 					-Wno-unused-value -Wno-unused-parameter -Wno-missing-field-initializers -Wuninitialized -Wmaybe-uninitialized -Wall -Wextra -Wno-unused-parameter \
 # 					-Wno-missing-field-initializers -Wtype-limits -Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wpointer-arith -Wno-cast-qual -Wmissing-prototypes \
 # 					-Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wno-discarded-qualifiers -Wformat-security -Wno-ignored-qualifiers -Wno-sign-compare -std=c99
-WARNINGS		:= -Wall -std=c99
+WARNINGS		:= -Wall -std=c99 -std=gnu99
 CFLAGS 			?= -O3 -g0 -I$(LVGL_DIR)/ $(WARNINGS)
 LDFLAGS 		?= -lm
 BIN 			= demo
