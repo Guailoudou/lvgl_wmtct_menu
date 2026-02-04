@@ -7,6 +7,9 @@ static void readtxt(){
         userhead = create_head();
     }
     FILE *fp = openfile(USERINFOFILE,"r");
+    if(fp==NULL){
+        FILE *fp = openfile(USERINFOFILE,"w+");
+    }
     char buf[100] = {0};
     int i = 0;
     if(fp!=NULL){
@@ -15,7 +18,7 @@ static void readtxt(){
             char name[32] = {0};
             char passwd[32] = {0};
             int type;
-            sscanf(buf,"%d %s %s %d",uid,name,passwd,type);
+            sscanf(buf,"%d %s %s %d",&uid,name,passwd,&type);
             Ulist newnode = create_node(create_data(uid,name,passwd,type));
             list_add_tail(&newnode->my,&userhead->my);
             memset(buf,0,sizeof(buf));
@@ -53,6 +56,7 @@ static void writetxt(){
 static bool check_username(const char *iuser){
     if(userhead==NULL){
         userhead = create_head();
+        readtxt();
     }
     Ulist p=NULL,n=NULL;
     //从头结点到末尾进行遍历  安全遍历
@@ -69,6 +73,7 @@ static bool check_username(const char *iuser){
 int loginMenu(const char *iuser,const char *ipass){
     if(userhead==NULL){
         userhead = create_head();
+        readtxt();
     }
     Ulist p=NULL,n=NULL;
     //从头结点到末尾进行遍历  安全遍历
@@ -94,6 +99,7 @@ bool regMenu(const char *iuser,const char *ipass){
     }
     if(userhead==NULL){
         userhead = create_head();
+        readtxt();
     }
     // if(user_data==NULL)
     //     user_data = readtxt();
@@ -137,7 +143,8 @@ userInfo getUserInfo(int uid)
             return info;
         }
     }
-    return ;
+    strcpy(info.name,"NO_ITEM");
+    return info;
 }
 ////////////////////////////链表操作//////////////////////////
 static Ulist create_head()
@@ -170,13 +177,15 @@ static Ulist create_node(UserData data)
     }
 }
 
-static UserData create_data(int uid,char name[],char password[],int type){
+static UserData create_data(int uid,const char name[],const char password[],int type){
     UserData data ={
-        .data.name = name,
-        .data.password = password,
+        // .data.name = name,
+        // .data.password = password,
         .data.type = type,
         .data.uid = uid
     };
+    strcpy(data.data.name,name);
+    strcpy(data.data.password,password);
     return data;
 }
 

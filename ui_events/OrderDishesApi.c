@@ -15,7 +15,7 @@ static void readtxt(){
             int peice;
             char imgPath[1024] = {0};
             int type;
-            sscanf(buf,"%d %s %s %d %d",uid,imgPath,name,peice,type);
+            sscanf(buf,"%d %s %s %d %d",&uid,imgPath,name,&peice,&type);
             Dlist newnode = create_node(create_data(uid,imgPath,name,peice,type));
             list_add_tail(&newnode->my,&dishesHead->my);
             memset(buf,0,sizeof(buf));
@@ -49,6 +49,7 @@ static void writetxt(){
 ////////////////////////API/////////////////////
 void getMenuList(int pages,int type) //写入menuData
 {
+    if(dishesHead==NULL)readtxt();
     int len = getListLen(dishesHead);
     maxpages = len/8 + len%8==0?0:1;
     if(pages>=maxpages)isEnd=true;  //判断末页
@@ -73,7 +74,6 @@ void getMenuList(int pages,int type) //写入menuData
         }
     }
 }
-
 
 
 
@@ -122,12 +122,14 @@ static Dlist create_node(DishesData data)
 
 static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type){
     DishesData data = {
-        .data.name = name,
-        .data.imgPath=imgPath,
+        // .data.name = name,
+        // .data.imgPath=imgPath,
         .data.type = type,
         .data.uid = uid,
         .data.peice = peice
     };
+    strcpy(data.data.name,name);
+    strcpy(data.data.imgPath,imgPath);
     return data;
 }
 
@@ -167,5 +169,6 @@ dishesItem getDishesInfo(int uid)
             return info;
         }
     }
-    return ;
+    strcpy(info.name,"NO_ITEM");
+    return info;
 }

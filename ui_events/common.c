@@ -1,13 +1,21 @@
 #include "common.h"
-
+//////////////菜单////////////////
+Dlist dishesHead = NULL; //全部菜品数据
+dishesItem menuData[8]={0};
+int maxpages = 0;
+bool isEnd = false;
+//////////////登录/////////////////
+Ulist userhead = NULL;
+userInfo loginUser={.uid=-1,.type=0};
 //打开文件
-static FILE *openfile(const char *path,char *mode)
+FILE *openfile(const char *path,char *mode)
 {
     //打开文件 获取文件流指针
+    printf("path=%s mode=%s\n",path,mode);
     FILE *fp=fopen(path,mode);
     if(fp == NULL)
     {
-        perror("fopen failed\n");
+        perror("fopen failed mode");
         return NULL;
     }
     else
@@ -18,7 +26,7 @@ static FILE *openfile(const char *path,char *mode)
     }
 }
 //关闭文件
-static int closefile(FILE *fp)
+int closefile(FILE *fp)
 {
     //关闭文件 文件流指针负责关闭
     int ret=fclose(fp);

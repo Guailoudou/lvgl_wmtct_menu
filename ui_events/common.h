@@ -5,10 +5,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "Model.h"
 
 //打开文件
-static FILE *openfile(const char *path,char *mode);
+FILE *openfile(const char *path,char *mode);
 //关闭文件
-static int closefile(FILE *fp);
+int closefile(FILE *fp);
 
 #endif

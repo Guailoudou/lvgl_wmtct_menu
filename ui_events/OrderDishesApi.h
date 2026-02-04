@@ -3,13 +3,17 @@
 #include "Model.h"
 #include <stdlib.h>
 #include "common.h"
-
+#ifdef DEBUG
+#define USERINFOFILE "/home/loudou/file/yue/in/files/dishesInfo.txt"
+#else
 #define USERINFOFILE "/userdata/dishesInfo.txt"
-Dlist dishesHead = NULL; //全部菜品数据
-dishesItem menuData[8]={0};
-int maxpages = 0;
-bool isEnd = false;
+#endif
+extern Dlist dishesHead; //全部菜品数据
+extern dishesItem menuData[8];
+extern int maxpages;
+extern bool isEnd;
 
+void getMenuList(int pages,int type);//写入menuData
 dishesItem getDishesInfo(int uid); //获取菜品数据
 
 static Dlist create_head();
