@@ -3,6 +3,7 @@
 #include "OrderDishesApi.h"
 #include <stdio.h>
 int pages = 1;
+int coinNum = 0;
 extern userInfo loginUser;
 void viewClearChopp(lv_event_t * e);
 void viewAddChopp(lv_event_t * e);
@@ -286,12 +287,12 @@ void viewMenuInit(lv_event_t * e)
     printf("初始化\n");
     pages = 1;
     board.len = 0;
+    coinNum = 0;
     forDillItem();
     initMeun(pages);
     _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  526);
 }
 int forDillItem(){  //渲染菜版返回总金额
-    int coinNum=0;
     int len = board.len;
     lv_obj_clean(ui_Bill);
     for(int i=0;i<len;i++){
@@ -360,9 +361,15 @@ void checkoutChopp(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code != LV_EVENT_CLICKED)return;
     //付钱ing....
-    printf("付款了\x58");
+    char buf[50] = {0};
+    sprintf(buf,"总共消费 %d\n",coinNum);
+    strcat(buf,"付款成功！老板欢迎下次再来！");
+    lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", buf, NULL, true);
+    lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
+    lv_obj_center(mbox1);
     //清空菜板
     board.len = 0;
+    coinNum = 0;
     forDillItem();
 }
 
