@@ -380,6 +380,7 @@ void viewMenuInit(lv_event_t * e)
 }
 void forDillItem(){  //渲染菜版返回总金额
     int len = board.len;
+    coinNum = 0;
     lv_obj_clean(ui_Bill);
     for(int i=0;i<len;i++){
         int uid = board.dishesUids[i].dishesUids;
