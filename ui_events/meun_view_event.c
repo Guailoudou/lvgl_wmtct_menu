@@ -13,9 +13,7 @@ void forDillItem();
 void initMeun(int tpages)
 {
     char buf[30] = {0};
-    
-    strcat(buf,"< 退出登录 当前用户: ");
-    strcat(buf,loginUser.name);
+    sprintf(buf,"< 退出登录 当前用户: %s",loginUser.name);
     lv_label_set_text(ui_OutLoginText, buf);
     memset(buf, 0, sizeof(buf));
     printf("权限等级: %d\n",loginUser.type);
@@ -32,7 +30,7 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[0].uid);
         lv_label_set_text(ui_meunUid1, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s $%d", menuData[0].name, menuData[0].peice);
+        sprintf(buf, "%s ￥%d", menuData[0].name, menuData[0].peice);
         lv_label_set_text(ui_meuntext1, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -44,7 +42,7 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[1].uid);
         lv_label_set_text(ui_meunUid2, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s $%d", menuData[1].name, menuData[1].peice);
+        sprintf(buf, "%s ￥%d", menuData[1].name, menuData[1].peice);
         lv_label_set_text(ui_meuntext2, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -56,7 +54,7 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[2].uid);
         lv_label_set_text(ui_meunUid3, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s $%d", menuData[2].name, menuData[2].peice);
+        sprintf(buf, "%s ￥%d", menuData[2].name, menuData[2].peice);
         lv_label_set_text(ui_meuntext3, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -68,7 +66,7 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[3].uid);
         lv_label_set_text(ui_meunUid4, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s $%d", menuData[3].name, menuData[3].peice);
+        sprintf(buf, "%s ￥%d", menuData[3].name, menuData[3].peice);
         lv_label_set_text(ui_meuntext4, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -80,7 +78,7 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[4].uid);
         lv_label_set_text(ui_meunUid5, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s $%d", menuData[4].name, menuData[4].peice);
+        sprintf(buf, "%s ￥%d", menuData[4].name, menuData[4].peice);
         lv_label_set_text(ui_meuntext5, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -92,7 +90,7 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[5].uid);
         lv_label_set_text(ui_meunUid6, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s $%d", menuData[5].name, menuData[5].peice);
+        sprintf(buf, "%s ￥%d", menuData[5].name, menuData[5].peice);
         lv_label_set_text(ui_meuntext6, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -104,7 +102,7 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[6].uid);
         lv_label_set_text(ui_meunUid7, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s $%d", menuData[6].name, menuData[6].peice);
+        sprintf(buf, "%s ￥%d", menuData[6].name, menuData[6].peice);
         lv_label_set_text(ui_meuntext7, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -116,7 +114,7 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[7].uid);
         lv_label_set_text(ui_meunUid8, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s $%d", menuData[7].name, menuData[7].peice);
+        sprintf(buf, "%s ￥%d", menuData[7].name, menuData[7].peice);
         lv_label_set_text(ui_meuntext8, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -148,7 +146,7 @@ void createCoinMunItem(int num)
     lv_obj_set_width(temp_coinText, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(temp_coinText, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(temp_coinText, LV_ALIGN_CENTER);
-    lv_label_set_text(temp_coinText, "总金额: ");
+    lv_label_set_text(temp_coinText, "总金额: ￥");
     lv_obj_set_style_text_font(temp_coinText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_t *temp_coinMun = lv_label_create(temp_Container7);
@@ -324,6 +322,7 @@ void viewAddChopp(lv_event_t * e)
             printf("Label text: %s\n", uid_str);
             if(strcmp(uid_str,"+")==0)continue;
             int uid = atoi(uid_str);
+            printf("intuid = %d\n",uid);
             addChoppBoard(uid,true);
 
             break; // 如果只需要第一个 label，可以 break
@@ -364,10 +363,8 @@ void checkoutChopp(lv_event_t * e)
     //付钱ing....
     printf("付款开始！\n");
     ///////
-    char buf[100] = {0};
-    sprintf(buf,"总共消费 %d\n",coinNum);
-    strcat(buf,"付款成功！老板欢迎下次再来！");
-    printf("提示：%s\n",buf);
+    char buf[60] = {0};
+    sprintf(buf,"总共消费 %d\n付款成功！老板欢迎下次再来！",coinNum);
     lv_obj_t *mbox11 = lv_msgbox_create(NULL, "提示", buf, NULL, true);
     printf("设置字体\n");
     lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
