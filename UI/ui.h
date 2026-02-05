@@ -98,33 +98,32 @@ extern lv_obj_t * ui_meunUid8;
 extern lv_obj_t * ui_meuntext8;
 extern lv_obj_t * ui_PagesInfo;
 extern lv_obj_t * ui_Bill;
-extern lv_obj_t * ui_Container1;
-extern lv_obj_t * ui_Container4;
-extern lv_obj_t * ui_BillItemName;
-extern lv_obj_t * ui_Container5;
-extern lv_obj_t * ui_BillItemClear;
-extern lv_obj_t * ui_BillItemUid11;
-extern lv_obj_t * ui_BillItemClearLabel;
-extern lv_obj_t * ui_BillItemNum;
-extern lv_obj_t * ui_BillItemAdd;
-extern lv_obj_t * ui_BillItemUid12;
-extern lv_obj_t * ui_BillItemAddLabel;
-extern lv_obj_t * ui_Container2;
-extern lv_obj_t * ui_Container7;
-extern lv_obj_t * ui_coinText;
-extern lv_obj_t * ui_coinMun;
-extern lv_obj_t * ui_coinBtn;
-extern lv_obj_t * ui_coinBtnText;
 void ui_event_OutLoginBtn(lv_event_t * e);
 extern lv_obj_t * ui_OutLoginBtn;
 extern lv_obj_t * ui_OutLoginText;
-// SCREEN: ui_Screen2
-void ui_Screen2_screen_init(void);
-extern lv_obj_t * ui_Screen2;
+// SCREEN: ui_AdminView
+void ui_AdminView_screen_init(void);
+extern lv_obj_t * ui_AdminView;
+extern lv_obj_t * ui_Panel1;
+extern lv_obj_t * ui_UserListHead;
+extern lv_obj_t * ui_Label5;
+extern lv_obj_t * ui_Label6;
+extern lv_obj_t * ui_Label7;
+extern lv_obj_t * ui_UserListBody;
+extern lv_obj_t * ui_UserListItem;
+extern lv_obj_t * ui_Label2;
+extern lv_obj_t * ui_Dropdown1;
+extern lv_obj_t * ui_operation;
+extern lv_obj_t * ui_saveBtn;
+extern lv_obj_t * ui_saveBtnText;
+extern lv_obj_t * ui_userListUid;
+extern lv_obj_t * ui_delBtn;
+extern lv_obj_t * ui_delBtnText;
+extern lv_obj_t * ui_delListUid;
 extern lv_obj_t * ui____initial_actions0;
 
 
-LV_IMG_DECLARE(ui_img_ylnimg_png);    // assets/ylnimg.png
+LV_IMG_DECLARE(ui_img_loginback_png);    // assets/loginback.png
 LV_IMG_DECLARE(ui_img_1371183408);    // assets/背景.png
 LV_IMG_DECLARE(ui_img_xtq_img_png);    // assets/xtq_img.png
 

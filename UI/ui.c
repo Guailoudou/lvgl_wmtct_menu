@@ -94,31 +94,30 @@ lv_obj_t * ui_meunUid8;
 lv_obj_t * ui_meuntext8;
 lv_obj_t * ui_PagesInfo;
 lv_obj_t * ui_Bill;
-lv_obj_t * ui_Container1;
-lv_obj_t * ui_Container4;
-lv_obj_t * ui_BillItemName;
-lv_obj_t * ui_Container5;
-lv_obj_t * ui_BillItemClear;
-lv_obj_t * ui_BillItemUid11;
-lv_obj_t * ui_BillItemClearLabel;
-lv_obj_t * ui_BillItemNum;
-lv_obj_t * ui_BillItemAdd;
-lv_obj_t * ui_BillItemUid12;
-lv_obj_t * ui_BillItemAddLabel;
-lv_obj_t * ui_Container2;
-lv_obj_t * ui_Container7;
-lv_obj_t * ui_coinText;
-lv_obj_t * ui_coinMun;
-lv_obj_t * ui_coinBtn;
-lv_obj_t * ui_coinBtnText;
 void ui_event_OutLoginBtn(lv_event_t * e);
 lv_obj_t * ui_OutLoginBtn;
 lv_obj_t * ui_OutLoginText;
 
 
-// SCREEN: ui_Screen2
-void ui_Screen2_screen_init(void);
-lv_obj_t * ui_Screen2;
+// SCREEN: ui_AdminView
+void ui_AdminView_screen_init(void);
+lv_obj_t * ui_AdminView;
+lv_obj_t * ui_Panel1;
+lv_obj_t * ui_UserListHead;
+lv_obj_t * ui_Label5;
+lv_obj_t * ui_Label6;
+lv_obj_t * ui_Label7;
+lv_obj_t * ui_UserListBody;
+lv_obj_t * ui_UserListItem;
+lv_obj_t * ui_Label2;
+lv_obj_t * ui_Dropdown1;
+lv_obj_t * ui_operation;
+lv_obj_t * ui_saveBtn;
+lv_obj_t * ui_saveBtnText;
+lv_obj_t * ui_userListUid;
+lv_obj_t * ui_delBtn;
+lv_obj_t * ui_delBtnText;
+lv_obj_t * ui_delListUid;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -363,7 +362,7 @@ void ui_init(void)
     lv_disp_set_theme(dispp, theme);
     ui_LoginView_screen_init();
     ui_MenuView_screen_init();
-    ui_Screen2_screen_init();
+    ui_AdminView_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_LoginView);
 }

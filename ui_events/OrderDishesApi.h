@@ -21,10 +21,6 @@ bool rmChoppBoard(int dishesUid);   //删除
 bool addChoppBoard(int dishesUid,bool isplus); //添加到菜单
 bool checkout();    //结账 清除库存
 bool replenishment();  //补货 添加库存
-static Dlist create_head();
-static Dlist create_node(DishesData data);
-static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type);
-static int getListLen(Dlist head,int type); //获取长度
-static int getMaxUid(Dlist head);   //  获取目前的uid最大值
+
 
 #endif

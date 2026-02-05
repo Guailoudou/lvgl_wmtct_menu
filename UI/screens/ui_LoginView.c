@@ -9,7 +9,7 @@ void ui_LoginView_screen_init(void)
 {
     ui_LoginView = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_LoginView, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_img_src(ui_LoginView, &ui_img_ylnimg_png, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(ui_LoginView, &ui_img_loginback_png, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_set_style_bg_img_tiled(ui_LoginView, true, LV_PART_SCROLLBAR | LV_STATE_DEFAULT);
 

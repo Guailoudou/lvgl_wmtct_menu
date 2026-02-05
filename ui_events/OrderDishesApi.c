@@ -1,5 +1,10 @@
 #include "OrderDishesApi.h"
 extern userInfo loginUser;
+static Dlist create_head();
+static Dlist create_node(DishesData data);
+static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type);
+static int getListLen(Dlist head,int type); //获取长度
+static int getMaxUid(Dlist head);   //  获取目前的uid最大值
 //////////////////////文件操作///////////////////////////////
 static void readtxt(){
     if(dishesHead==NULL){
