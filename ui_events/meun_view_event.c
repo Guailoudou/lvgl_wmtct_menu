@@ -207,6 +207,8 @@ void createCoinMunItem(int num)
     lv_obj_set_flex_align(temp_Container2, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_clear_flag(temp_Container2, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
+    lv_obj_move_to_index(temp_Container2, 0);
+
     lv_obj_t *temp_Container7 = lv_obj_create(temp_Container2);
     lv_obj_remove_style_all(temp_Container7);
     lv_obj_set_width(temp_Container7, 208);
@@ -376,7 +378,7 @@ void viewMenuInit(lv_event_t * e)
         lv_obj_add_flag(ui_OpenAdminBtn,LV_OBJ_FLAG_HIDDEN);
     else
         lv_obj_clear_flag(ui_OpenAdminBtn,LV_OBJ_FLAG_HIDDEN);
-    _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  526);
+    _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  460);
 }
 void forDillItem(){  //渲染菜版返回总金额
     int len = board.len;

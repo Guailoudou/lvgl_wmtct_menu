@@ -405,7 +405,7 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_width(ui_Bill, 372);
     lv_obj_set_height(ui_Bill, 501);
     lv_obj_set_x(ui_Bill, 291);
-    lv_obj_set_y(ui_Bill, 39);
+    lv_obj_set_y(ui_Bill, 452);
     lv_obj_set_align(ui_Bill, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Bill, LV_FLEX_FLOW_COLUMN);
     lv_obj_set_flex_align(ui_Bill, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
