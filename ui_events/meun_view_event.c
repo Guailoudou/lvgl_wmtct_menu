@@ -362,10 +362,21 @@ void checkoutChopp(lv_event_t * e)
     if(event_code != LV_EVENT_CLICKED)return;
     //付钱ing....
     printf("付款开始！\n");
+    //生成账单
+    char buf[4196] = {0};
+    sprintf(buf,"菜名\t单价\t数量\n");
+    for(int i=0;i<board.len;i++)
+    {
+        char temp[200] = {0};
+        int uid = board.dishesUids[i].dishesUids;
+        dishesItem info = getDishesInfo(uid);
+        sprintf(temp,"%s\t%d\t%d\n",info.name,info.peice,board.dishesUids[i].num);
+        strcat(buf,temp);
+    }
     ///////
-    char buf[60] = {0};
-    sprintf(buf,"总共消费 %d\n付款成功！老板欢迎下次再来！",coinNum);
-    lv_obj_t *mbox11 = lv_msgbox_create(NULL, "提示", buf, NULL, true);
+    
+    sprintf(buf,"%s总共消费 %d\n付款成功！老板欢迎下次再来！",buf,coinNum);
+    lv_obj_t *mbox11 = lv_msgbox_create(NULL, "明细", buf, NULL, true);
     printf("设置字体\n");
     lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
     lv_obj_center(mbox11);
