@@ -2,7 +2,7 @@
 extern userInfo loginUser;
 static Dlist create_head();
 static Dlist create_node(DishesData data);
-static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type);
+static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type,int inventory);
 static int getListLen(Dlist head,int type); //获取长度
 static int getMaxUid(Dlist head);   //  获取目前的uid最大值
 //////////////////////文件操作///////////////////////////////
@@ -18,11 +18,10 @@ static void readtxt(){
         while(fgets(buf,sizeof(buf),fp) != NULL){
             int uid;
             char name[32] = {0};
-            int peice;
+            int peice,type,inventory;
             char imgPath[1024] = {0};
-            int type;
-            sscanf(buf,"%d %s %s %d %d",&uid,imgPath,name,&peice,&type);
-            Dlist newnode = create_node(create_data(uid,imgPath,name,peice,type));
+            sscanf(buf,"%d %s %s %d %d %d",&uid,imgPath,name,&peice,&type,&inventory);
+            Dlist newnode = create_node(create_data(uid,imgPath,name,peice,type,inventory));
             list_add_tail(&newnode->my,&dishesHead->my);
             memset(buf,0,sizeof(buf));
         }
@@ -44,9 +43,9 @@ static void writetxt(){
     //从头结点到末尾进行遍历  安全遍历
     list_for_each_entry_safe(p,n,&(dishesHead->my),my)
     {
-        fprintf(fp,"%d %s %s %d %d\n",p->data.data.uid,p->data.data.imgPath,
+        fprintf(fp,"%d %s %s %d %d %d\n",p->data.data.uid,p->data.data.imgPath,
             p->data.data.name,p->data.data.peice,
-            p->data.data.type);
+            p->data.data.type,p->data.data.inventory);
     }
 
     closefile(fp);
@@ -83,6 +82,7 @@ char *getMenuList(char pagestr[],int pages,int type) //写入menuData
         }
         if(p->data.data.type<=type){
             menuData[data_i++] = p->data.data;
+            inventoryBoard[p->data.data.uid] = p->data.data.inventory;
             printf("%s ",p->data.data.name);
         }
         if(data_i==8){
@@ -136,19 +136,45 @@ bool rmChoppBoard(int dishesUid)
 
 bool checkout()
 {
+    // for(int i=0;i<board.len;i++){
+    //     int uid = board.dishesUids[i].dishesUids;
+    //     int num = board.dishesUids[i].num;
+    //     inventoryBoard[uid] -= num;
+    // }
     for(int i=0;i<board.len;i++){
         int uid = board.dishesUids[i].dishesUids;
         int num = board.dishesUids[i].num;
-        inventoryBoard[uid] -= num;
+        Dlist p=NULL,n=NULL;
+        //从头结点到末尾进行遍历  安全遍历
+        list_for_each_entry_safe(p,n,&(dishesHead->my),my)
+        {
+           if(p->data.data.uid==uid){
+                p->data.data.inventory -= num;
+           }
+        }
     }
+    writetxt();
 }
 bool replenishment()
 {
+    // for(int i=0;i<board.len;i++){
+    //     int uid = board.dishesUids[i].dishesUids;
+    //     int num = board.dishesUids[i].num;
+    //     inventoryBoard[uid] += num;
+    // }
     for(int i=0;i<board.len;i++){
         int uid = board.dishesUids[i].dishesUids;
         int num = board.dishesUids[i].num;
-        inventoryBoard[uid] += num;
+        Dlist p=NULL,n=NULL;
+        //从头结点到末尾进行遍历  安全遍历
+        list_for_each_entry_safe(p,n,&(dishesHead->my),my)
+        {
+           if(p->data.data.uid==uid){
+                p->data.data.inventory += num;
+           }
+        }
     }
+    writetxt();
 }
 ////////////////////////////链表操作//////////////////////////
 static Dlist create_head()
@@ -181,13 +207,14 @@ static Dlist create_node(DishesData data)
     }
 }
 
-static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type){
+static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type,int inventory){
     DishesData data = {
         // .data.name = name,
         // .data.imgPath=imgPath,
         .data.type = type,
         .data.uid = uid,
-        .data.peice = peice
+        .data.peice = peice,
+        .data.inventory = inventory
     };
     strcpy(data.data.name,name);
     strcpy(data.data.imgPath,imgPath);

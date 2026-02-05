@@ -369,6 +369,7 @@ void viewMenuInit(lv_event_t * e)
     pages = 1;
     board.len = 0;
     coinNum = 0;
+    
     forDillItem();
     initMeun(pages);
     if(loginUser.type<=1)

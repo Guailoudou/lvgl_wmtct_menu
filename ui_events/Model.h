@@ -25,6 +25,7 @@ typedef struct dishesItem   //单个菜
     char name[STRLEN];  //菜品名称
     int peice;  //菜品价格
     int type;   //类型  权限等级>=菜品等级，则允许返回
+    int inventory; //库存
 }dishesItem;
 
 
