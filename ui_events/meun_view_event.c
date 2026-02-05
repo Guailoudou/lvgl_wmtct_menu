@@ -8,6 +8,7 @@ extern userInfo loginUser;
 void viewClearChopp(lv_event_t * e);
 void viewAddChopp(lv_event_t * e);
 void checkoutChopp(lv_event_t * e);
+void replenishmentChopp(lv_event_t * e);
 void forDillItem();
 //生成菜单元件
 void initMeun(int tpages)
@@ -30,7 +31,10 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[0].uid);
         lv_label_set_text(ui_meunUid1, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s ￥%d", menuData[0].name, menuData[0].peice);
+        if(loginUser.type<=1)
+            sprintf(buf, "%s ￥%d", menuData[0].name, menuData[0].peice);
+        else
+            sprintf(buf, "%s 库存：%d", menuData[0].name, inventoryBoard[menuData[0].uid]);
         lv_label_set_text(ui_meuntext1, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -42,7 +46,10 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[1].uid);
         lv_label_set_text(ui_meunUid2, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s ￥%d", menuData[1].name, menuData[1].peice);
+        if(loginUser.type<=1)
+            sprintf(buf, "%s ￥%d", menuData[1].name, menuData[1].peice);
+        else
+            sprintf(buf, "%s 库存：%d", menuData[1].name, inventoryBoard[menuData[1].uid]);
         lv_label_set_text(ui_meuntext2, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -54,7 +61,10 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[2].uid);
         lv_label_set_text(ui_meunUid3, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s ￥%d", menuData[2].name, menuData[2].peice);
+        if(loginUser.type<=1)
+            sprintf(buf, "%s ￥%d", menuData[2].name, menuData[2].peice);
+        else
+            sprintf(buf, "%s 库存：%d", menuData[2].name, inventoryBoard[menuData[2].uid]);
         lv_label_set_text(ui_meuntext3, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -66,7 +76,10 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[3].uid);
         lv_label_set_text(ui_meunUid4, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s ￥%d", menuData[3].name, menuData[3].peice);
+        if(loginUser.type<=1)
+            sprintf(buf, "%s ￥%d", menuData[3].name, menuData[3].peice);
+        else
+            sprintf(buf, "%s 库存：%d", menuData[3].name, inventoryBoard[menuData[3].uid]);
         lv_label_set_text(ui_meuntext4, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -78,7 +91,10 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[4].uid);
         lv_label_set_text(ui_meunUid5, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s ￥%d", menuData[4].name, menuData[4].peice);
+        if(loginUser.type<=1)
+            sprintf(buf, "%s ￥%d", menuData[4].name, menuData[4].peice);
+        else
+            sprintf(buf, "%s 库存：%d", menuData[4].name, inventoryBoard[menuData[4].uid]);
         lv_label_set_text(ui_meuntext5, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -90,7 +106,10 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[5].uid);
         lv_label_set_text(ui_meunUid6, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s ￥%d", menuData[5].name, menuData[5].peice);
+        if(loginUser.type<=1)
+            sprintf(buf, "%s ￥%d", menuData[5].name, menuData[5].peice);
+        else
+            sprintf(buf, "%s 库存：%d", menuData[5].name, inventoryBoard[menuData[5].uid]);
         lv_label_set_text(ui_meuntext6, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -102,7 +121,10 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[6].uid);
         lv_label_set_text(ui_meunUid7, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s ￥%d", menuData[6].name, menuData[6].peice);
+        if(loginUser.type<=1)
+            sprintf(buf, "%s ￥%d", menuData[6].name, menuData[6].peice);
+        else
+            sprintf(buf, "%s 库存：%d", menuData[6].name, inventoryBoard[menuData[6].uid]);
         lv_label_set_text(ui_meuntext7, buf);
         memset(buf, 0, sizeof(buf));
     }else{
@@ -114,12 +136,64 @@ void initMeun(int tpages)
         sprintf(buf, "%d", menuData[7].uid);
         lv_label_set_text(ui_meunUid8, buf);
         memset(buf, 0, sizeof(buf));
-        sprintf(buf, "%s ￥%d", menuData[7].name, menuData[7].peice);
+        if(loginUser.type<=1)
+            sprintf(buf, "%s ￥%d", menuData[7].name, menuData[7].peice);
+        else
+            sprintf(buf, "%s 库存：%d", menuData[7].name, inventoryBoard[menuData[7].uid]);
         lv_label_set_text(ui_meuntext8, buf);
         memset(buf, 0, sizeof(buf));
     }else{
         lv_obj_add_flag(ui_meunItem8,LV_OBJ_FLAG_HIDDEN);
     }
+    lv_obj_set_style_img_recolor(ui_meunimg1, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_meunimg2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_meunimg3, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_meunimg4, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_meunimg5, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_meunimg6, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_meunimg7, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor(ui_meunimg8, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    if(inventoryBoard[menuData[0].uid]==0){
+        lv_obj_set_style_img_recolor_opa(ui_meunimg1, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }else{
+        lv_obj_set_style_img_recolor_opa(ui_meunimg1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if(inventoryBoard[menuData[1].uid]==0){
+        lv_obj_set_style_img_recolor_opa(ui_meunimg2, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }else{
+        lv_obj_set_style_img_recolor_opa(ui_meunimg2, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if(inventoryBoard[menuData[2].uid]==0){
+        lv_obj_set_style_img_recolor_opa(ui_meunimg3, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }else{
+        lv_obj_set_style_img_recolor_opa(ui_meunimg3, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if(inventoryBoard[menuData[3].uid]==0){
+        lv_obj_set_style_img_recolor_opa(ui_meunimg4, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }else{
+        lv_obj_set_style_img_recolor_opa(ui_meunimg4, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if(inventoryBoard[menuData[4].uid]==0){
+        lv_obj_set_style_img_recolor_opa(ui_meunimg5, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }else{
+        lv_obj_set_style_img_recolor_opa(ui_meunimg5, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if(inventoryBoard[menuData[5].uid]==0){
+        lv_obj_set_style_img_recolor_opa(ui_meunimg6, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }else{
+        lv_obj_set_style_img_recolor_opa(ui_meunimg6, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if(inventoryBoard[menuData[6].uid]==0){
+        lv_obj_set_style_img_recolor_opa(ui_meunimg7, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }else{
+        lv_obj_set_style_img_recolor_opa(ui_meunimg7, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if(inventoryBoard[menuData[7].uid]==0){
+        lv_obj_set_style_img_recolor_opa(ui_meunimg8, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }else{
+        lv_obj_set_style_img_recolor_opa(ui_meunimg8, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+
 }
 //创建结算元件
 void createCoinMunItem(int num)
@@ -141,23 +215,26 @@ void createCoinMunItem(int num)
     lv_obj_set_flex_flow(temp_Container7, LV_FLEX_FLOW_ROW);
     lv_obj_set_flex_align(temp_Container7, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_clear_flag(temp_Container7, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    if(loginUser.type<=1)
+    {
+        lv_obj_t *temp_coinText = lv_label_create(temp_Container7);
+        lv_obj_set_width(temp_coinText, LV_SIZE_CONTENT);   /// 1
+        lv_obj_set_height(temp_coinText, LV_SIZE_CONTENT);    /// 1
+        lv_obj_set_align(temp_coinText, LV_ALIGN_CENTER);
+        lv_label_set_text(temp_coinText, "总金额: ￥");
+        lv_obj_set_style_text_font(temp_coinText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_t *temp_coinText = lv_label_create(temp_Container7);
-    lv_obj_set_width(temp_coinText, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(temp_coinText, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(temp_coinText, LV_ALIGN_CENTER);
-    lv_label_set_text(temp_coinText, "总金额: ￥");
-    lv_obj_set_style_text_font(temp_coinText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    lv_obj_t *temp_coinMun = lv_label_create(temp_Container7);
-    lv_obj_set_width(temp_coinMun, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(temp_coinMun, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(temp_coinMun, LV_ALIGN_CENTER);
-    char buf[20] = {0};
-    sprintf(buf,"%d",num);
-    lv_label_set_text(temp_coinMun, buf);
-    lv_obj_set_style_text_align(temp_coinMun, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(temp_coinMun, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_t *temp_coinMun = lv_label_create(temp_Container7);
+        lv_obj_set_width(temp_coinMun, LV_SIZE_CONTENT);   /// 1
+        lv_obj_set_height(temp_coinMun, LV_SIZE_CONTENT);    /// 1
+        lv_obj_set_align(temp_coinMun, LV_ALIGN_CENTER);
+        char buf[20] = {0};
+        sprintf(buf,"%d",num);
+        lv_label_set_text(temp_coinMun, buf);
+        lv_obj_set_style_text_align(temp_coinMun, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_font(temp_coinMun, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    
 
     lv_obj_t *temp_coinBtn = lv_btn_create(temp_Container2);
     lv_obj_set_width(temp_coinBtn, 100);
@@ -165,14 +242,19 @@ void createCoinMunItem(int num)
     lv_obj_set_align(temp_coinBtn, LV_ALIGN_CENTER);
     lv_obj_add_flag(temp_coinBtn, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(temp_coinBtn, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    lv_obj_add_event_cb(temp_coinBtn,checkoutChopp,LV_EVENT_ALL, NULL);
+    if(loginUser.type<=1)
+        lv_obj_add_event_cb(temp_coinBtn,checkoutChopp,LV_EVENT_ALL, NULL);
+    else
+        lv_obj_add_event_cb(temp_coinBtn,replenishmentChopp,LV_EVENT_ALL, NULL);
 
     lv_obj_t *temp_coinBtnText = lv_label_create(temp_coinBtn);
     lv_obj_set_width(temp_coinBtnText, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(temp_coinBtnText, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(temp_coinBtnText, LV_ALIGN_CENTER);
-    lv_label_set_text(temp_coinBtnText, "结算");
+    if(loginUser.type<=1)
+        lv_label_set_text(temp_coinBtnText, "结算");
+    else
+        lv_label_set_text(temp_coinBtnText, "补货");
     lv_obj_set_style_text_font(temp_coinBtnText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 }
 //创建账单元件
@@ -323,7 +405,13 @@ void viewAddChopp(lv_event_t * e)
             if(strcmp(uid_str,"+")==0)continue;
             int uid = atoi(uid_str);
             printf("intuid = %d\n",uid);
-            addChoppBoard(uid,true);
+            if(!addChoppBoard(uid,true))
+            {
+                lv_obj_t *mbox11 = lv_msgbox_create(NULL, "提示", "当前商品已售罄！", NULL, true);
+                printf("设置字体\n");
+                lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
+                lv_obj_center(mbox11);
+            }
 
             break; // 如果只需要第一个 label，可以 break
         }
@@ -362,6 +450,7 @@ void checkoutChopp(lv_event_t * e)
     if(event_code != LV_EVENT_CLICKED)return;
     //付钱ing....
     printf("付款开始！\n");
+    checkout();
     //生成账单
     char buf[4196] = {0};
     sprintf(buf,"菜名\t单价\t数量\n");
@@ -385,5 +474,37 @@ void checkoutChopp(lv_event_t * e)
     board.len = 0;
     coinNum = 0;
     forDillItem();
+    initMeun(pages);
 }
 
+void replenishmentChopp(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code != LV_EVENT_CLICKED)return;
+
+    replenishment();
+    
+    char buf[4196] = {0};
+    sprintf(buf,"菜名\t数量\n");
+    for(int i=0;i<board.len;i++)
+    {
+        char temp[200] = {0};
+        int uid = board.dishesUids[i].dishesUids;
+        dishesItem info = getDishesInfo(uid);
+        sprintf(temp,"%s\t%d\n",info.name,board.dishesUids[i].num);
+        strcat(buf,temp);
+    }
+    sprintf(buf,"%s补货成功！",buf);
+    lv_obj_t *mbox11 = lv_msgbox_create(NULL, "补货单", buf, NULL, true);
+    printf("设置字体\n");
+    lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
+    lv_obj_center(mbox11);
+
+    //清空菜板
+    board.len = 0;
+    coinNum = 0;
+    forDillItem();
+    initMeun(pages);
+
+}

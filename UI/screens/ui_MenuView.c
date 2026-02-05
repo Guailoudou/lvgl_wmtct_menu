@@ -101,6 +101,8 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_align(ui_meunimg2, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_meunimg2, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_meunimg2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_img_recolor(ui_meunimg2, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor_opa(ui_meunimg2, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_meunUid2 = lv_label_create(ui_menuButton2);
     lv_obj_set_width(ui_meunUid2, LV_SIZE_CONTENT);   /// 1

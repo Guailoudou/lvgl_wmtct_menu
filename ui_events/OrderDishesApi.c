@@ -1,5 +1,5 @@
 #include "OrderDishesApi.h"
-
+extern userInfo loginUser;
 //////////////////////文件操作///////////////////////////////
 static void readtxt(){
     if(dishesHead==NULL){
@@ -90,19 +90,29 @@ char *getMenuList(char pagestr[],int pages,int type) //写入menuData
 
 bool addChoppBoard(int dishesUid,bool isplus)
 {
+    bool inventory = true;
+    if(inventoryBoard[dishesUid]==0 && loginUser.type<=1){
+        inventory = false;
+        return inventory;
+    }
     for(int i=0;i<board.len;i++){
         if(board.dishesUids[i].dishesUids==dishesUid){
             if(isplus)board.dishesUids[i].num++;
             else board.dishesUids[i].num--;
+            if(board.dishesUids[i].num>inventoryBoard[dishesUid]  && loginUser.type<=1){
+                board.dishesUids[i].num--;
+                inventory = false;
+            }
             if(board.dishesUids[i].num<=0){
                 rmChoppBoard(dishesUid);
             }
-            return true;
+            return inventory;
         }
     }
+
     board.dishesUids[board.len].dishesUids = dishesUid;
     board.dishesUids[board.len++].num = 1;
-    return true;
+    return inventory;
 }
 bool rmChoppBoard(int dishesUid)
 {
@@ -119,8 +129,22 @@ bool rmChoppBoard(int dishesUid)
     return false;
 }
 
-
-
+bool checkout()
+{
+    for(int i=0;i<board.len;i++){
+        int uid = board.dishesUids[i].dishesUids;
+        int num = board.dishesUids[i].num;
+        inventoryBoard[uid] -= num;
+    }
+}
+bool replenishment()
+{
+    for(int i=0;i<board.len;i++){
+        int uid = board.dishesUids[i].dishesUids;
+        int num = board.dishesUids[i].num;
+        inventoryBoard[uid] += num;
+    }
+}
 ////////////////////////////链表操作//////////////////////////
 static Dlist create_head()
 {
