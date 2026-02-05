@@ -101,8 +101,12 @@ extern lv_obj_t * ui_Bill;
 void ui_event_OutLoginBtn(lv_event_t * e);
 extern lv_obj_t * ui_OutLoginBtn;
 extern lv_obj_t * ui_OutLoginText;
+void ui_event_OpenAdminBtn(lv_event_t * e);
+extern lv_obj_t * ui_OpenAdminBtn;
+extern lv_obj_t * ui_OpenAdminBtnText;
 // SCREEN: ui_AdminView
 void ui_AdminView_screen_init(void);
+void ui_event_AdminView(lv_event_t * e);
 extern lv_obj_t * ui_AdminView;
 extern lv_obj_t * ui_Panel1;
 extern lv_obj_t * ui_UserListHead;
@@ -120,6 +124,9 @@ extern lv_obj_t * ui_userListUid;
 extern lv_obj_t * ui_delBtn;
 extern lv_obj_t * ui_delBtnText;
 extern lv_obj_t * ui_delListUid;
+void ui_event_OpenMeunBtn(lv_event_t * e);
+extern lv_obj_t * ui_OpenMeunBtn;
+extern lv_obj_t * ui_OpenMeunBtnText;
 extern lv_obj_t * ui____initial_actions0;
 
 

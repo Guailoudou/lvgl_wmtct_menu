@@ -6,15 +6,34 @@
 #include "../UI/ui_events.h"
 #include "../UI/ui.h"
 #include <stdio.h>
+#include "Model.h"
 extern bool setUserType(int uid,int type);
 extern bool delUser(int uid);
+extern Ulist userhead;
 static int deluid = 0;
 int tempadmin[1024] = {[0 ... 1023] = 0};
+void userlistInit();
+void createUserItme(char name[],int uid,int type);
+static void Dropdown_event_handler(lv_event_t * e);
+static void Save_event_handler(lv_event_t * e);
+static void msgbox_event_cb(lv_event_t * e);
+static void Del_event_handler(lv_event_t * e);
 //页面初始化
 void viewAdminInit(lv_event_t * e)
 {
-    printf("初始化\n");
+    printf("初始化管理页面\n");
+    userlistInit();
 
+}
+void userlistInit()
+{
+    lv_obj_clean(ui_UserListBody);
+    Ulist p=NULL,n=NULL;
+    //从头结点到末尾进行遍历  安全遍历
+    list_for_each_entry_safe(p,n,&(userhead->my),my)
+    {
+        createUserItme(p->data.data.name,p->data.data.uid,p->data.data.type);
+    }
 }
 void createUserItme(char name[],int uid,int type) //渲染一个用户列表
 {
@@ -104,12 +123,12 @@ void createUserItme(char name[],int uid,int type) //渲染一个用户列表
     lv_label_set_text(temp_delListUid, buf);
     lv_obj_add_flag(temp_delListUid, LV_OBJ_FLAG_HIDDEN);     /// Flags
 
-    lv_obj_t *temp_delListUid = lv_label_create(temp_Dropdown1);
-    lv_obj_set_width(temp_delListUid, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(temp_delListUid, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(temp_delListUid, LV_ALIGN_CENTER);
-    lv_label_set_text(temp_delListUid, buf);
-    lv_obj_add_flag(temp_delListUid, LV_OBJ_FLAG_HIDDEN);     /// Flags
+    lv_obj_t *temp_delListUid1 = lv_label_create(temp_Dropdown1);
+    lv_obj_set_width(temp_delListUid1, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(temp_delListUid1, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(temp_delListUid1, LV_ALIGN_CENTER);
+    lv_label_set_text(temp_delListUid1, buf);
+    lv_obj_add_flag(temp_delListUid1, LV_OBJ_FLAG_HIDDEN);     /// Flags
 
     lv_dropdown_set_selected(temp_Dropdown1,type);
     lv_obj_add_event_cb(temp_Dropdown1, Dropdown_event_handler, LV_EVENT_ALL, NULL);
@@ -124,10 +143,10 @@ static void Dropdown_event_handler(lv_event_t * e)
     if(code == LV_EVENT_VALUE_CHANGED) {
         char buf[32];
         lv_dropdown_get_selected_str(obj, buf, sizeof(buf));
-        LV_LOG_USER("Option: %s", buf);
+        printf("Option: %s\n", buf);
         int type = 0;
-        if(strcmp(buf,"管理员"))type=2;
-        if(strcmp(buf,"VIP客户"))type=1;
+        if(strcmp(buf,"管理员")==0)type=2;
+        if(strcmp(buf,"VIP客户")==0)type=1;
         // 遍历 target 的所有子对象
         uint32_t child_cnt = lv_obj_get_child_cnt(obj);
         for (uint32_t i = 0; i < child_cnt; i++) {
@@ -141,6 +160,7 @@ static void Dropdown_event_handler(lv_event_t * e)
                 int uid = atoi(uid_str);
                 // setUserType(uid,type);
                 tempadmin[uid] = type;
+                printf("%d = %d",uid,type);
                 break; 
             }
         }
@@ -166,9 +186,10 @@ static void Save_event_handler(lv_event_t * e)
                 int uid = atoi(uid_str);
                 if(setUserType(uid,tempadmin[uid]))
                 {
-                    lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "删除成功！", NULL, true);
+                    lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "保存成功！", NULL, true);
                     lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
                     lv_obj_center(mbox1);
+                    userlistInit();
                 }
                 // tempadmin[uid] = type;
                 break; 
@@ -185,6 +206,7 @@ static void msgbox_event_cb(lv_event_t * e)
     if(strcmp(buf,"确认")==0){
         delUser(deluid);
         lv_msgbox_close(obj);
+        userlistInit();
     }
     if(strcmp(buf,"取消")==0){
         lv_msgbox_close(obj);

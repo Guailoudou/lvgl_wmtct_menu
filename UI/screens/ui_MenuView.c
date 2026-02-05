@@ -435,6 +435,28 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_style_text_opa(ui_OutLoginText, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_OutLoginText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_OpenAdminBtn = lv_btn_create(ui_MenuView);
+    lv_obj_set_width(ui_OpenAdminBtn, 115);
+    lv_obj_set_height(ui_OpenAdminBtn, 36);
+    lv_obj_set_x(ui_OpenAdminBtn, 445);
+    lv_obj_set_y(ui_OpenAdminBtn, -266);
+    lv_obj_set_align(ui_OpenAdminBtn, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_OpenAdminBtn, LV_OBJ_FLAG_FLOATING | LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_OpenAdminBtn, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_OpenAdminBtn, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_OpenAdminBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(ui_OpenAdminBtn, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(ui_OpenAdminBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_OpenAdminBtnText = lv_label_create(ui_OpenAdminBtn);
+    lv_obj_set_width(ui_OpenAdminBtnText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_OpenAdminBtnText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_OpenAdminBtnText, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_OpenAdminBtnText, "用户管理");
+    lv_obj_set_style_text_color(ui_OpenAdminBtnText, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_OpenAdminBtnText, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_OpenAdminBtnText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_menuButton1, ui_event_menuButton1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton2, ui_event_menuButton2, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton3, ui_event_menuButton3, LV_EVENT_ALL, NULL);
@@ -444,6 +466,7 @@ void ui_MenuView_screen_init(void)
     lv_obj_add_event_cb(ui_menuButton7, ui_event_menuButton7, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton8, ui_event_menuButton8, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OutLoginBtn, ui_event_OutLoginBtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_OpenAdminBtn, ui_event_OpenAdminBtn, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_MenuView, ui_event_MenuView, LV_EVENT_ALL, NULL);
 
 }

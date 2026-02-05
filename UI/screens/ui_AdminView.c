@@ -149,4 +149,29 @@ void ui_AdminView_screen_init(void)
     lv_label_set_text(ui_delListUid, "1");
     lv_obj_add_flag(ui_delListUid, LV_OBJ_FLAG_HIDDEN);     /// Flags
 
+    ui_OpenMeunBtn = lv_btn_create(ui_AdminView);
+    lv_obj_set_width(ui_OpenMeunBtn, 115);
+    lv_obj_set_height(ui_OpenMeunBtn, 36);
+    lv_obj_set_x(ui_OpenMeunBtn, -416);
+    lv_obj_set_y(ui_OpenMeunBtn, -267);
+    lv_obj_set_align(ui_OpenMeunBtn, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_OpenMeunBtn, LV_OBJ_FLAG_FLOATING | LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_OpenMeunBtn, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_OpenMeunBtn, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_OpenMeunBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_color(ui_OpenMeunBtn, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_opa(ui_OpenMeunBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_OpenMeunBtnText = lv_label_create(ui_OpenMeunBtn);
+    lv_obj_set_width(ui_OpenMeunBtnText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_OpenMeunBtnText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_OpenMeunBtnText, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_OpenMeunBtnText, "< 返回");
+    lv_obj_set_style_text_color(ui_OpenMeunBtnText, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_OpenMeunBtnText, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_OpenMeunBtnText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_OpenMeunBtn, ui_event_OpenMeunBtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_AdminView, ui_event_AdminView, LV_EVENT_ALL, NULL);
+
 }

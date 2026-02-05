@@ -371,6 +371,10 @@ void viewMenuInit(lv_event_t * e)
     coinNum = 0;
     forDillItem();
     initMeun(pages);
+    if(loginUser.type<=1)
+        lv_obj_add_flag(ui_OpenAdminBtn,LV_OBJ_FLAG_HIDDEN);
+    else
+        lv_obj_clear_flag(ui_OpenAdminBtn,LV_OBJ_FLAG_HIDDEN);
     _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  526);
 }
 void forDillItem(){  //渲染菜版返回总金额

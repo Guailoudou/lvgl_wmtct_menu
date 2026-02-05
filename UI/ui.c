@@ -97,10 +97,14 @@ lv_obj_t * ui_Bill;
 void ui_event_OutLoginBtn(lv_event_t * e);
 lv_obj_t * ui_OutLoginBtn;
 lv_obj_t * ui_OutLoginText;
+void ui_event_OpenAdminBtn(lv_event_t * e);
+lv_obj_t * ui_OpenAdminBtn;
+lv_obj_t * ui_OpenAdminBtnText;
 
 
 // SCREEN: ui_AdminView
 void ui_AdminView_screen_init(void);
+void ui_event_AdminView(lv_event_t * e);
 lv_obj_t * ui_AdminView;
 lv_obj_t * ui_Panel1;
 lv_obj_t * ui_UserListHead;
@@ -118,6 +122,9 @@ lv_obj_t * ui_userListUid;
 lv_obj_t * ui_delBtn;
 lv_obj_t * ui_delBtnText;
 lv_obj_t * ui_delListUid;
+void ui_event_OpenMeunBtn(lv_event_t * e);
+lv_obj_t * ui_OpenMeunBtn;
+lv_obj_t * ui_OpenMeunBtnText;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -349,6 +356,30 @@ void ui_event_OutLoginBtn(lv_event_t * e)
     if(event_code == LV_EVENT_CLICKED) {
         viewOutLogin(e);
         _ui_screen_change(&ui_LoginView, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_LoginView_screen_init);
+    }
+}
+void ui_event_OpenAdminBtn(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_AdminView, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_AdminView_screen_init);
+    }
+}
+void ui_event_AdminView(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_SCREEN_LOADED) {
+        viewAdminInit(e);
+    }
+}
+void ui_event_OpenMeunBtn(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_MenuView, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_MenuView_screen_init);
     }
 }
 
