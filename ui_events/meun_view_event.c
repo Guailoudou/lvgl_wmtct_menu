@@ -4,6 +4,7 @@
 #include <stdio.h>
 int pages = 1;
 int coinNum = 0;
+int Sum = 0;
 extern userInfo loginUser;
 void viewClearChopp(lv_event_t * e);
 void viewAddChopp(lv_event_t * e);
@@ -217,25 +218,27 @@ void createCoinMunItem(int num)
     lv_obj_set_flex_flow(temp_Container7, LV_FLEX_FLOW_ROW);
     lv_obj_set_flex_align(temp_Container7, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_clear_flag(temp_Container7, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    if(loginUser.type<=1)
-    {
-        lv_obj_t *temp_coinText = lv_label_create(temp_Container7);
-        lv_obj_set_width(temp_coinText, LV_SIZE_CONTENT);   /// 1
-        lv_obj_set_height(temp_coinText, LV_SIZE_CONTENT);    /// 1
-        lv_obj_set_align(temp_coinText, LV_ALIGN_CENTER);
-        lv_label_set_text(temp_coinText, "总金额: ￥");
-        lv_obj_set_style_text_font(temp_coinText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-        lv_obj_t *temp_coinMun = lv_label_create(temp_Container7);
-        lv_obj_set_width(temp_coinMun, LV_SIZE_CONTENT);   /// 1
-        lv_obj_set_height(temp_coinMun, LV_SIZE_CONTENT);    /// 1
-        lv_obj_set_align(temp_coinMun, LV_ALIGN_CENTER);
-        char buf[20] = {0};
-        sprintf(buf,"%d",num);
-        lv_label_set_text(temp_coinMun, buf);
-        lv_obj_set_style_text_align(temp_coinMun, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_text_font(temp_coinMun, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
+    lv_obj_t *temp_coinText = lv_label_create(temp_Container7);
+    lv_obj_set_width(temp_coinText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(temp_coinText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(temp_coinText, LV_ALIGN_CENTER);
+    if(loginUser.type<=1)
+        lv_label_set_text(temp_coinText, "总金额: ￥");
+    else
+        lv_label_set_text(temp_coinText, "总补货数: ");
+    lv_obj_set_style_text_font(temp_coinText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_t *temp_coinMun = lv_label_create(temp_Container7);
+    lv_obj_set_width(temp_coinMun, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(temp_coinMun, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(temp_coinMun, LV_ALIGN_CENTER);
+    char buf[20] = {0};
+    sprintf(buf,"%d",num);
+    lv_label_set_text(temp_coinMun, buf);
+    lv_obj_set_style_text_align(temp_coinMun, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(temp_coinMun, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+    
     
 
     lv_obj_t *temp_coinBtn = lv_btn_create(temp_Container2);
@@ -383,16 +386,21 @@ void viewMenuInit(lv_event_t * e)
 void forDillItem(){  //渲染菜版返回总金额
     int len = board.len;
     coinNum = 0;
+    Sum = 0;
     lv_obj_clean(ui_Bill);
     for(int i=0;i<len;i++){
         int uid = board.dishesUids[i].dishesUids;
         int num = board.dishesUids[i].num;
+        Sum += num;
         dishesItem data = getDishesInfo(uid);
         coinNum += data.peice * num;
         createBillItem(data.name,num,uid);
     }
-    createCoinMunItem(coinNum);
-    printf("当前总金额：%d\n",coinNum);
+    if(loginUser.type<=1)
+        createCoinMunItem(coinNum);
+    else
+        createCoinMunItem(Sum);
+    printf("当前总金额：%d 总数量%d\n",coinNum,Sum);
     return;
 }
 void viewAddChopp(lv_event_t * e)
@@ -472,7 +480,7 @@ void checkoutChopp(lv_event_t * e)
     }
     ///////
     
-    sprintf(buf,"%s总共消费 %d\n付款成功！老板欢迎下次再来！",buf,coinNum);
+    sprintf(buf,"%s总共消费：%d 菜品总数：%d\n付款成功！老板欢迎下次再来！",buf,coinNum,Sum);
     lv_obj_t *mbox11 = lv_msgbox_create(NULL, "明细", buf, NULL, true);
     printf("设置字体\n");
     lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
@@ -503,7 +511,7 @@ void replenishmentChopp(lv_event_t * e)
         sprintf(temp,"%s\t%d\n",info.name,board.dishesUids[i].num);
         strcat(buf,temp);
     }
-    sprintf(buf,"%s补货成功！",buf);
+    sprintf(buf,"%s补货成功！\n总共补货%d件",buf,Sum);
     lv_obj_t *mbox11 = lv_msgbox_create(NULL, "补货单", buf, NULL, true);
     printf("设置字体\n");
     lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
