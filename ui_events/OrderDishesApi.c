@@ -111,12 +111,18 @@ bool addChoppBoard(int dishesUid,bool isplus)
             if(board.dishesUids[i].num<=0){
                 rmChoppBoard(dishesUid);
             }
+            for(int i=0;i<board.len;i++){
+                printf("当前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
+            }
             return inventory;
         }
     }
 
     board.dishesUids[board.len].dishesUids = dishesUid;
     board.dishesUids[board.len++].num = 1;
+    for(int i=0;i<board.len;i++){
+        printf("当前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
+    }
     return inventory;
 }
 bool rmChoppBoard(int dishesUid)

@@ -11,9 +11,19 @@ void viewAddChopp(lv_event_t * e);
 void checkoutChopp(lv_event_t * e);
 void replenishmentChopp(lv_event_t * e);
 void forDillItem();
+// lv_timer_t *times;
+// void my_timer_callback(lv_timer_t * timer) {
+//     lv_obj_add_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
+//     printf("加载结束\n");
+//     // lv_obj_del(times);
+// }
+
 //生成菜单元件
 void initMeun(int tpages)
 {
+    // lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
+    // printf("加载开始\n");
+    //////////////////////////////////加载开始//////////////////////////////////////////
     char buf[30] = {0};
     sprintf(buf,"< 退出登录 当前用户: %s",loginUser.name);
     lv_label_set_text(ui_OutLoginText, buf);
@@ -194,7 +204,10 @@ void initMeun(int tpages)
     }else{
         lv_obj_set_style_img_recolor_opa(ui_meunimg8, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     }
-
+////////////////////////////////////加载完毕////////////////////////////////////////////////////
+    // times = lv_timer_create(my_timer_callback, 1000, NULL);
+    // lv_timer_set_repeat_count(times, 1);
+    
 }
 //创建结算元件
 void createCoinMunItem(int num)
@@ -370,6 +383,10 @@ void viewLaftPage(lv_event_t * e)
 //页面初始化
 void viewMenuInit(lv_event_t * e)
 {
+    // lv_obj_clean(ui_Loading);
+    // lv_obj_t *gif_obj = lv_gif_create(ui_Loading);
+    // lv_gif_set_src(gif_obj, "F:/userdata/files/loading.gif");
+    // lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
     printf("初始化\n");
     pages = 1;
     board.len = 0;
@@ -382,6 +399,7 @@ void viewMenuInit(lv_event_t * e)
     else
         lv_obj_clear_flag(ui_OpenAdminBtn,LV_OBJ_FLAG_HIDDEN);
     _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  460);
+    // lv_obj_add_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
 }
 void forDillItem(){  //渲染菜版返回总金额
     int len = board.len;
@@ -421,6 +439,9 @@ void viewAddChopp(lv_event_t * e)
             if(strcmp(uid_str,"+")==0)continue;
             int uid = atoi(uid_str);
             printf("intuid = %d\n",uid);
+            for(int i=0;i<board.len;i++){
+                printf("当前添加前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
+            }
             if(!addChoppBoard(uid,true))
             {
                 lv_obj_t *mbox11 = lv_msgbox_create(NULL, "提示", "当前商品已售罄！", NULL, true);

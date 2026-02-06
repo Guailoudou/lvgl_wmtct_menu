@@ -100,6 +100,7 @@ lv_obj_t * ui_OutLoginText;
 void ui_event_OpenAdminBtn(lv_event_t * e);
 lv_obj_t * ui_OpenAdminBtn;
 lv_obj_t * ui_OpenAdminBtnText;
+lv_obj_t * ui_Loading;
 
 
 // SCREEN: ui_AdminView

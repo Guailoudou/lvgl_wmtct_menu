@@ -104,6 +104,7 @@ extern lv_obj_t * ui_OutLoginText;
 void ui_event_OpenAdminBtn(lv_event_t * e);
 extern lv_obj_t * ui_OpenAdminBtn;
 extern lv_obj_t * ui_OpenAdminBtnText;
+extern lv_obj_t * ui_Loading;
 // SCREEN: ui_AdminView
 void ui_AdminView_screen_init(void);
 void ui_event_AdminView(lv_event_t * e);
