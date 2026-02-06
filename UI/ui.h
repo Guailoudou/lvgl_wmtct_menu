@@ -43,6 +43,10 @@ extern lv_obj_t * ui_AIR001;
 void ui_event_LoginButton(lv_event_t * e);
 extern lv_obj_t * ui_LoginButton;
 extern lv_obj_t * ui_Label4;
+extern lv_obj_t * ui_Container1;
+void ui_event_Button1(lv_event_t * e);
+extern lv_obj_t * ui_Button1;
+extern lv_obj_t * ui_Label3;
 // SCREEN: ui_MenuView
 void ui_MenuView_screen_init(void);
 void ui_event_MenuView(lv_event_t * e);

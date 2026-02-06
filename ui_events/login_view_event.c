@@ -90,7 +90,7 @@ void login_ac_ev(lv_event_t * e)
 
         }else{
             printf("登录失败！");
-            lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "登录失败！", NULL, true);
+            lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "登录失败！账号密码不正确或账号已被停用", NULL, true);
             lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
             lv_obj_center(mbox1);
         }
@@ -114,4 +114,21 @@ void set_kbindex_ev(lv_event_t * e)
 void viewOutLogin(lv_event_t * e)
 {
     outLogin();
+}
+void anonymouslogin(lv_event_t * e)
+{
+    if(loginMenu("anonymous","anonymous")!=-1){
+        printf("登录成功！");
+        lv_textarea_set_text(ui_inusername,"");
+        lv_textarea_set_text(ui_inpassword,"");
+        lv_textarea_set_text(ui_intopassword,"");
+        _ui_screen_change(&ui_MenuView, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_LoginView_screen_init);
+        // lv_obj_add_flag(superior, LV_OBJ_FLAG_HIDDEN);
+
+    }else{
+        printf("登录失败！");
+        lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "登录失败！管理员关闭了匿名登录", NULL, true);
+        lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
+        lv_obj_center(mbox1);
+    }
 }

@@ -13,6 +13,7 @@ extern "C" {
 void set_kbindex_ev(lv_event_t * e);
 void reg_ac_ev(lv_event_t * e);
 void login_ac_ev(lv_event_t * e);
+void anonymouslogin(lv_event_t * e);
 void viewNextPage(lv_event_t * e);
 void viewLaftPage(lv_event_t * e);
 void viewMenuInit(lv_event_t * e);

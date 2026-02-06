@@ -162,12 +162,35 @@ void ui_LoginView_screen_init(void)
     lv_label_set_text(ui_Label4, "登录");
     lv_obj_set_style_text_font(ui_Label4, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_Container1 = lv_obj_create(ui_LoginBlock);
+    lv_obj_remove_style_all(ui_Container1);
+    lv_obj_set_width(ui_Container1, 373);
+    lv_obj_set_height(ui_Container1, 50);
+    lv_obj_set_x(ui_Container1, -135);
+    lv_obj_set_y(ui_Container1, 199);
+    lv_obj_set_align(ui_Container1, LV_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Container1, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_Button1 = lv_btn_create(ui_Container1);
+    lv_obj_set_width(ui_Button1, 171);
+    lv_obj_set_height(ui_Button1, 50);
+    lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_Label3 = lv_label_create(ui_Button1);
+    lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label3, "直接点菜");
+
     lv_obj_add_event_cb(ui_Keyboard1, ui_event_Keyboard1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_inusername, ui_event_inusername, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_inpassword, ui_event_inpassword, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_intopassword, ui_event_intopassword, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_RegButton, ui_event_RegButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LoginButton, ui_event_LoginButton, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_Button1, ui_event_Button1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_LoginView, ui_event_LoginView, LV_EVENT_ALL, NULL);
 
 }

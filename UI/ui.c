@@ -37,6 +37,10 @@ lv_obj_t * ui_AIR001;
 void ui_event_LoginButton(lv_event_t * e);
 lv_obj_t * ui_LoginButton;
 lv_obj_t * ui_Label4;
+lv_obj_t * ui_Container1;
+void ui_event_Button1(lv_event_t * e);
+lv_obj_t * ui_Button1;
+lv_obj_t * ui_Label3;
 
 
 // SCREEN: ui_MenuView
@@ -258,6 +262,14 @@ void ui_event_LoginButton(lv_event_t * e)
         login_ac_ev(e);
         _ui_flag_modify(ui_intopassword, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
         _ui_flag_modify(ui_topasswordText, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+    }
+}
+void ui_event_Button1(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_CLICKED) {
+        anonymouslogin(e);
     }
 }
 void ui_event_MenuView(lv_event_t * e)
