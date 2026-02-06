@@ -96,7 +96,7 @@ int loginMenu(const char *iuser,const char *ipass){
             strcpy(loginUser.password,pass);
             loginUser.uid = p->data.data.uid;
             loginUser.type = p->data.data.type;
-            return p->data.data.uid;
+            return loginUser.type;
         }
     }
     return -1;

@@ -57,7 +57,7 @@ void createUserItme(char name[],int uid,int type) //渲染一个用户列表
     lv_label_set_text(temp_Label2, name);
 
     lv_obj_t *temp_Dropdown1 = lv_dropdown_create(temp_UserListItem);
-    lv_dropdown_set_options(temp_Dropdown1, "普通客户\nVIP客户\n管理员");
+    lv_dropdown_set_options(temp_Dropdown1, "普通客户\nVIP客户\n管理员\n封禁");
     lv_obj_set_width(temp_Dropdown1, 150);
     lv_obj_set_height(temp_Dropdown1, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(temp_Dropdown1, LV_ALIGN_CENTER);
@@ -130,7 +130,7 @@ void createUserItme(char name[],int uid,int type) //渲染一个用户列表
     lv_label_set_text(temp_delListUid1, buf);
     lv_obj_add_flag(temp_delListUid1, LV_OBJ_FLAG_HIDDEN);     /// Flags
 
-    lv_dropdown_set_selected(temp_Dropdown1,type);
+    lv_dropdown_set_selected(temp_Dropdown1,type==-1?3:type);
     lv_obj_add_event_cb(temp_Dropdown1, Dropdown_event_handler, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(temp_saveBtn, Save_event_handler, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(temp_delBtn, Del_event_handler, LV_EVENT_ALL, NULL);
@@ -147,6 +147,7 @@ static void Dropdown_event_handler(lv_event_t * e)
         int type = 0;
         if(strcmp(buf,"管理员")==0)type=2;
         if(strcmp(buf,"VIP客户")==0)type=1;
+        if(strcmp(buf,"封禁")==0)type=-1;
         // 遍历 target 的所有子对象
         uint32_t child_cnt = lv_obj_get_child_cnt(obj);
         for (uint32_t i = 0; i < child_cnt; i++) {
