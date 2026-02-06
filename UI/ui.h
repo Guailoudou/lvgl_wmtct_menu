@@ -17,6 +17,18 @@ extern "C" {
 
 void board_Animation(lv_obj_t * TargetObject, int delay);
 void boardbay_Animation(lv_obj_t * TargetObject, int delay);
+void loading_Animation(lv_obj_t * TargetObject, int delay);
+void yuanloading_Animation(lv_obj_t * TargetObject, int delay);
+void yuanloading2_Animation(lv_obj_t * TargetObject, int delay);
+// SCREEN: ui_HelloView
+void ui_HelloView_screen_init(void);
+void ui_event_HelloView(lv_event_t * e);
+extern lv_obj_t * ui_HelloView;
+extern lv_obj_t * ui_Panel2;
+extern lv_obj_t * ui_Image2;
+extern lv_obj_t * ui_Container2;
+extern lv_obj_t * ui_Image3;
+extern lv_obj_t * ui_Label8;
 // SCREEN: ui_LoginView
 void ui_LoginView_screen_init(void);
 void ui_event_LoginView(lv_event_t * e);
@@ -136,6 +148,7 @@ extern lv_obj_t * ui____initial_actions0;
 
 
 LV_IMG_DECLARE(ui_img_loginback_png);    // assets/loginback.png
+LV_IMG_DECLARE(ui_img_yuanloading_png);    // assets/yuanloading.png
 LV_IMG_DECLARE(ui_img_1371183408);    // assets/背景.png
 LV_IMG_DECLARE(ui_img_xtq_img_png);    // assets/xtq_img.png
 

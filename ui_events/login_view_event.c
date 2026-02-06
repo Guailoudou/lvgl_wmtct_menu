@@ -132,3 +132,12 @@ void anonymouslogin(lv_event_t * e)
         lv_obj_center(mbox1);
     }
 }
+void OpenLoginView_timer_callback()
+{
+    _ui_screen_change(&ui_LoginView, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_LoginView_screen_init);
+}
+void OpenLoginView(lv_event_t * e)
+{
+    lv_timer_t *ltimes = lv_timer_create(OpenLoginView_timer_callback, 8600, NULL);
+    lv_timer_set_repeat_count(ltimes, 1);
+}
