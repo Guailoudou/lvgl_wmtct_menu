@@ -115,7 +115,7 @@ bool regMenu(const char *iuser,const char *ipass){
     // int len = user_data->len;
     printf("注册传入:%s %s\n",iuser,ipass);
     int uid = getMaxUid(userhead);
-    Ulist newnode = create_node(create_data(++uid,iuser,ipass,0));
+    Ulist newnode = create_node(create_data(++uid,iuser,ipass,1));
     list_add_tail(&newnode->my,&userhead->my);
 
     writetxt();
