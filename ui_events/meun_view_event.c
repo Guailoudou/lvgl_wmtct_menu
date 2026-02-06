@@ -383,10 +383,10 @@ void viewLaftPage(lv_event_t * e)
 //页面初始化
 void viewMenuInit(lv_event_t * e)
 {
-    // lv_obj_clean(ui_Loading);
-    // lv_obj_t *gif_obj = lv_gif_create(ui_Loading);
-    // lv_gif_set_src(gif_obj, "F:/userdata/files/loading.gif");
-    // lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clean(ui_Loading);
+    lv_obj_t *gif_obj = lv_gif_create(ui_Loading);
+    lv_gif_set_src(gif_obj, "F:/userdata/files/loading.gif");
+    lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
     printf("初始化\n");
     pages = 1;
     board.len = 0;
