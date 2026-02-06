@@ -11,18 +11,18 @@ void viewAddChopp(lv_event_t * e);
 void checkoutChopp(lv_event_t * e);
 void replenishmentChopp(lv_event_t * e);
 void forDillItem();
-// lv_timer_t *times;
-// void my_timer_callback(lv_timer_t * timer) {
-//     lv_obj_add_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
-//     printf("加载结束\n");
-//     // lv_obj_del(times);
-// }
+lv_timer_t *times;
+void my_timer_callback(lv_timer_t * timer) {
+    lv_obj_add_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
+    printf("加载结束\n");
+    // lv_obj_del(times);
+}
 
 //生成菜单元件
 void initMeun(int tpages)
 {
-    // lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
-    // printf("加载开始\n");
+    lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
+    printf("加载开始\n");
     //////////////////////////////////加载开始//////////////////////////////////////////
     char buf[30] = {0};
     sprintf(buf,"< 退出登录 当前用户: %s",loginUser.name);
@@ -205,8 +205,8 @@ void initMeun(int tpages)
         lv_obj_set_style_img_recolor_opa(ui_meunimg8, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     }
 ////////////////////////////////////加载完毕////////////////////////////////////////////////////
-    // times = lv_timer_create(my_timer_callback, 1000, NULL);
-    // lv_timer_set_repeat_count(times, 1);
+    times = lv_timer_create(my_timer_callback, 1000, NULL);
+    lv_timer_set_repeat_count(times, 1);
     
 }
 //创建结算元件
@@ -383,10 +383,10 @@ void viewLaftPage(lv_event_t * e)
 //页面初始化
 void viewMenuInit(lv_event_t * e)
 {
-    // lv_obj_clean(ui_Loading);
-    // lv_obj_t *gif_obj = lv_gif_create(ui_Loading);
-    // lv_gif_set_src(gif_obj, "F:/userdata/files/loading.gif");
-    // lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clean(ui_Loading);
+    lv_obj_t *gif_obj = lv_gif_create(ui_Loading);
+    lv_gif_set_src(gif_obj, "F:/userdata/files/loading.gif");
+    lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
     printf("初始化\n");
     pages = 1;
     board.len = 0;
