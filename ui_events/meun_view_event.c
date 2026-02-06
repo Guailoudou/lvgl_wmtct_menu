@@ -205,7 +205,7 @@ void initMeun(int tpages)
         lv_obj_set_style_img_recolor_opa(ui_meunimg8, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     }
 ////////////////////////////////////加载完毕////////////////////////////////////////////////////
-    times = lv_timer_create(my_timer_callback, 1000, NULL);
+    times = lv_timer_create(my_timer_callback, 500, NULL);
     lv_timer_set_repeat_count(times, 1);
     
 }
@@ -370,15 +370,24 @@ void createBillItem(char *name,int num,int uid)
     lv_obj_add_event_cb(temp_BillItemAdd,viewAddChopp,LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(temp_BillItemClear,viewClearChopp,LV_EVENT_ALL, NULL);
 }
+void next_callback(lv_timer_t *timer){
+    initMeun(++pages);
+}
 void viewNextPage(lv_event_t * e)
 {
-    printf("下一页\n");
-    initMeun(++pages);
+    printf("下一页\n"); 
+    times = lv_timer_create(next_callback, 200, NULL);
+    lv_timer_set_repeat_count(times, 1);
+    
+}
+void laft_callback(lv_timer_t *timer){
+    initMeun(--pages);
 }
 void viewLaftPage(lv_event_t * e)
 {
     printf("上一页\n");
-    initMeun(--pages);
+    times = lv_timer_create(laft_callback, 200, NULL);
+    lv_timer_set_repeat_count(times, 1);
 }
 //页面初始化
 void viewMenuInit(lv_event_t * e)
@@ -425,7 +434,7 @@ void viewAddChopp(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
-    if(event_code != LV_EVENT_CLICKED)return;
+    if(event_code != LV_EVENT_RELEASED)return;
     printf("添加\n");
     // 遍历 target 的所有子对象
     uint32_t child_cnt = lv_obj_get_child_cnt(target);
