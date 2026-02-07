@@ -5,7 +5,7 @@
 
 #include "../UI/ui_events.h"
 #include "../UI/ui.h"
-#include <stdio.h>
+#include "common.h"
 #include "Model.h"
 extern bool setUserType(int uid,int type);
 extern bool delUser(int uid);
@@ -21,7 +21,7 @@ static void Del_event_handler(lv_event_t * e);
 //页面初始化
 void viewAdminInit(lv_event_t * e)
 {
-    printf("初始化管理页面\n");
+    logprint("初始化管理页面\n");
     userlistInit();
 
 }
@@ -143,7 +143,7 @@ static void Dropdown_event_handler(lv_event_t * e)
     if(code == LV_EVENT_VALUE_CHANGED) {
         char buf[32];
         lv_dropdown_get_selected_str(obj, buf, sizeof(buf));
-        printf("Option: %s\n", buf);
+        logprint("Option: %s\n", buf);
         int type = 0;
         if(strcmp(buf,"管理员")==0)type=2;
         if(strcmp(buf,"VIP客户")==0)type=1;
@@ -156,12 +156,12 @@ static void Dropdown_event_handler(lv_event_t * e)
             if (lv_obj_check_type(child, &lv_label_class)) {
                 // 找到了 label！
                 const char * uid_str = lv_label_get_text(child);
-                printf("Label text: %s\n", uid_str);
+                logprint("Label text: %s\n", uid_str);
                 // if(strcmp(uid_str,"-")==0)continue;
                 int uid = atoi(uid_str);
                 // setUserType(uid,type);
                 tempadmin[uid] = type;
-                printf("%d = %d",uid,type);
+                logprint("%d = %d",uid,type);
                 break; 
             }
         }
@@ -182,7 +182,7 @@ static void Save_event_handler(lv_event_t * e)
             if (lv_obj_check_type(child, &lv_label_class)) {
                 // 找到了 label！
                 const char * uid_str = lv_label_get_text(child);
-                printf("Label text: %s\n", uid_str);
+                logprint("Label text: %s\n", uid_str);
                 if(strcmp(uid_str,"保存")==0)continue;
                 int uid = atoi(uid_str);
                 if(setUserType(uid,tempadmin[uid]))
@@ -227,7 +227,7 @@ static void Del_event_handler(lv_event_t * e)
             if (lv_obj_check_type(child, &lv_label_class)) {
                 // 找到了 label！
                 const char * uid_str = lv_label_get_text(child);
-                printf("Label text: %s\n", uid_str);
+                logprint("Label text: %s\n", uid_str);
                 if(strcmp(uid_str,"删除")==0)continue;
                 int uid = atoi(uid_str);
                 deluid = uid;

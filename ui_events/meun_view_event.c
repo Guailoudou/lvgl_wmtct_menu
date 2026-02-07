@@ -1,7 +1,6 @@
 #include "../UI/ui_events.h"
 #include "../UI/ui.h"
 #include "OrderDishesApi.h"
-#include <stdio.h>
 int pages = 1;
 int coinNum = 0;
 int Sum = 0;
@@ -15,7 +14,7 @@ void forDillItem();
 lv_timer_t *times;
 void my_timer_callback(lv_timer_t * timer) {
     lv_obj_add_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
-    printf("加载结束\n");
+    logprint("加载结束\n");
     // lv_obj_del(times);
 }
 
@@ -23,23 +22,23 @@ void my_timer_callback(lv_timer_t * timer) {
 void initMeun(int tpages)
 {
     lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
-    printf("加载开始\n");
+    logprint("加载开始\n");
     //////////////////////////////////加载开始//////////////////////////////////////////
     char buf[30] = {0};
     sprintf(buf,"< 退出登录 当前用户: %s",loginUser.name);
     lv_label_set_text(ui_OutLoginText, buf);
     memset(buf, 0, sizeof(buf));
-    printf("权限等级: %d\n",loginUser.type);
+    logprint("权限等级: %d\n",loginUser.type);
     getMenuList(buf,tpages,loginUser.type);
     lv_label_set_text(ui_PagesInfo, buf);
     sscanf(buf,"%d",&pages);
-    printf("外部页:%d\n",pages);
+    logprint("外部页:%d\n",pages);
     memset(buf, 0, sizeof(buf));
 
     if(menuData[0].uid != -1){
         lv_obj_clear_flag(ui_meunItem1,LV_OBJ_FLAG_HIDDEN);
         lv_img_set_src(ui_meunimg1, menuData[0].imgPath);
-        printf("图片地址：%s\n",menuData[0].imgPath);
+        logprint("图片地址：%s\n",menuData[0].imgPath);
         sprintf(buf, "%d", menuData[0].uid);
         lv_label_set_text(ui_meunUid1, buf);
         memset(buf, 0, sizeof(buf));
@@ -376,7 +375,7 @@ void next_callback(lv_timer_t *timer){
 }
 void viewNextPage(lv_event_t * e)
 {
-    printf("下一页\n"); 
+    logprint("下一页\n"); 
     times = lv_timer_create(next_callback, 200, NULL);
     lv_timer_set_repeat_count(times, 1);
     
@@ -386,7 +385,7 @@ void laft_callback(lv_timer_t *timer){
 }
 void viewLaftPage(lv_event_t * e)
 {
-    printf("上一页\n");
+    logprint("上一页\n");
     times = lv_timer_create(laft_callback, 200, NULL);
     lv_timer_set_repeat_count(times, 1);
 }
@@ -397,7 +396,7 @@ void viewMenuInit(lv_event_t * e)
     lv_obj_t *gif_obj = lv_gif_create(ui_Loading);
     lv_gif_set_src(gif_obj, "F:/userdata/files/loading.gif");
     lv_obj_clear_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
-    printf("初始化\n");
+    logprint("初始化\n");
     pages = 1;
     board.len = 0;
     coinNum = 0;
@@ -428,7 +427,7 @@ void forDillItem(){  //渲染菜版返回总金额
         createCoinMunItem(coinNum);
     else
         createCoinMunItem(Sum);
-    printf("当前总金额：%d 总数量%d\n",coinNum,Sum);
+    logprint("当前总金额：%d 总数量%d\n",coinNum,Sum);
     return;
 }
 void viewAddChopp(lv_event_t * e)
@@ -440,7 +439,7 @@ void viewAddChopp(lv_event_t * e)
         lookinfo = false;
         return;
     }
-    printf("添加\n");
+    logprint("添加\n");
     // 遍历 target 的所有子对象
     uint32_t child_cnt = lv_obj_get_child_cnt(target);
     for (uint32_t i = 0; i < child_cnt; i++) {
@@ -449,18 +448,18 @@ void viewAddChopp(lv_event_t * e)
         if (lv_obj_check_type(child, &lv_label_class)) {
             // 找到了 label！
             const char * uid_str = lv_label_get_text(child);
-            printf("Label text: %s\n", uid_str);
+            logprint("Label text: %s\n", uid_str);
             if(strcmp(uid_str,"+")==0)continue;
             if(strcmp(uid_str,"下单")==0)continue;
             int uid = atoi(uid_str);
-            printf("intuid = %d\n",uid);
+            logprint("intuid = %d\n",uid);
             for(int i=0;i<board.len;i++){
-                printf("当前添加前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
+                logprint("当前添加前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
             }
             if(!addChoppBoard(uid,true))
             {
                 lv_obj_t *mbox11 = lv_msgbox_create(NULL, "提示", "当前商品已售罄！", NULL, true);
-                printf("设置字体\n");
+                logprint("设置字体\n");
                 lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
                 lv_obj_center(mbox11);
             }
@@ -475,7 +474,7 @@ void viewClearChopp(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code != LV_EVENT_CLICKED)return;
-    printf("减少\n");
+    logprint("减少\n");
     // 遍历 target 的所有子对象
     uint32_t child_cnt = lv_obj_get_child_cnt(target);
     for (uint32_t i = 0; i < child_cnt; i++) {
@@ -484,7 +483,7 @@ void viewClearChopp(lv_event_t * e)
         if (lv_obj_check_type(child, &lv_label_class)) {
             // 找到了 label！
             const char * uid_str = lv_label_get_text(child);
-            printf("Label text: %s\n", uid_str);
+            logprint("Label text: %s\n", uid_str);
             if(strcmp(uid_str,"-")==0)continue;
             int uid = atoi(uid_str);
             addChoppBoard(uid,false);
@@ -501,7 +500,7 @@ void checkoutChopp(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code != LV_EVENT_CLICKED)return;
     //付钱ing....
-    printf("付款开始！\n");
+    logprint("付款开始！\n");
     checkout();
     //生成账单
     char buf[4196] = {0};
@@ -518,7 +517,7 @@ void checkoutChopp(lv_event_t * e)
     
     sprintf(buf,"%s总共消费：%d 菜品总数：%d\n付款成功！老板欢迎下次再来！",buf,coinNum,Sum);
     lv_obj_t *mbox11 = lv_msgbox_create(NULL, "明细", buf, NULL, true);
-    printf("设置字体\n");
+    logprint("设置字体\n");
     lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
     lv_obj_center(mbox11);
 
@@ -549,7 +548,7 @@ void replenishmentChopp(lv_event_t * e)
     }
     sprintf(buf,"%s补货成功！\n总共补货%d件",buf,Sum);
     lv_obj_t *mbox11 = lv_msgbox_create(NULL, "补货单", buf, NULL, true);
-    printf("设置字体\n");
+    logprint("设置字体\n");
     lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
     lv_obj_center(mbox11);
 
@@ -565,7 +564,7 @@ void viewAddInfo(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code != LV_EVENT_LONG_PRESSED)return;
-    printf("获取详细信息\n");
+    logprint("获取详细信息\n");
     // 遍历 target 的所有子对象
     uint32_t child_cnt = lv_obj_get_child_cnt(target);
     for (uint32_t i = 0; i < child_cnt; i++) {
@@ -574,9 +573,9 @@ void viewAddInfo(lv_event_t * e)
         if (lv_obj_check_type(child, &lv_label_class)) {
             // 找到了 label！
             const char * uid_str = lv_label_get_text(child);
-            printf("Label text: %s\n", uid_str);
+            logprint("Label text: %s\n", uid_str);
             int uid = atoi(uid_str);
-            printf("intuid = %d\n",uid);
+            logprint("intuid = %d\n",uid);
             dishesItem info = getDishesInfo(uid);
             char buf[1024] = {0};
             sprintf(buf,"%s\n￥%d\n库存：%d\n%s",info.name,
@@ -585,7 +584,7 @@ void viewAddInfo(lv_event_t * e)
             lv_label_set_text(ui_infoName,buf);
             lv_label_set_text(ui_infoUid,uid_str);
             lv_label_set_text(ui_infomsg,info.description);
-            printf("描述：%s\n",info.description);
+            logprint("描述：%s\n",info.description);
             lv_img_set_src(ui_infoImage,info.imgPath);
             lookinfo = true;
             break; // 如果只需要第一个 label，可以 break

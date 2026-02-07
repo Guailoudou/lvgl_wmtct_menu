@@ -13,7 +13,7 @@ userInfo loginUser={.uid=-1,.type=0};
 FILE *openfile(const char *path,char *mode)
 {
     //打开文件 获取文件流指针
-    printf("path=%s mode=%s\n",path,mode);
+    logprint("path=%s mode=%s\n",path,mode);
     FILE *fp=fopen(path,mode);
     if(fp == NULL)
     {
@@ -22,8 +22,8 @@ FILE *openfile(const char *path,char *mode)
     }
     else
     {
-        printf("打开文件成功\n");
-        printf("文件流指针：%p\n",fp);
+        logprint("打开文件成功\n");
+        logprint("文件流指针：%p\n",fp);
         return fp;
     }
 }
@@ -39,8 +39,34 @@ int closefile(FILE *fp)
     }
     else
     {
-        printf("关闭文件流成功\n");
+        logprint("关闭文件流成功\n");
         return 0;
     }
 }
+//自定义日志
+void logprint(char *str, ...) {
+    time_t now;
+    struct tm *time_now;
+    va_list args;  // 可变参数列表
+    
+    time(&now);
+    time_now = localtime(&now);
 
+    // 开始处理可变参数
+    va_start(args, str);
+    
+    // 先打印时间戳
+    printf("[system:%d:%d:%d] ", 
+           time_now->tm_hour, 
+           time_now->tm_min, 
+           time_now->tm_sec);
+    
+    // 处理格式化字符串
+    vprintf(str, args);  // 使用vprintf处理可变参数
+    printf("\n");
+    
+    // 结束可变参数处理
+    va_end(args);
+    
+    return;
+}

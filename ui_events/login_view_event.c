@@ -5,7 +5,7 @@
 
 #include "../UI/ui_events.h"
 #include "../UI/ui.h"
-#include <stdio.h>
+#include "common.h"
 bool Login_type = true;
 extern bool check_username(const char *iuser);
 extern bool OrderInit();
@@ -27,7 +27,7 @@ void reg_ac_ev(lv_event_t * e)
 	else
 	{
 		//注册逻辑
-		printf("执行注册逻辑");
+		logprint("执行注册逻辑");
 		const char *user = lv_textarea_get_text(ui_inusername);
         const char *pass = lv_textarea_get_text(ui_inpassword);
         const char *topass = lv_textarea_get_text(ui_intopassword);
@@ -44,7 +44,7 @@ void reg_ac_ev(lv_event_t * e)
             return;
         }
         if(regMenu(user,pass)){
-            printf("注册成功！");
+            logprint("注册成功！");
             lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "注册成功！", NULL, true);
             lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
             lv_obj_center(mbox1);
@@ -53,7 +53,7 @@ void reg_ac_ev(lv_event_t * e)
 
 
         }else{
-            printf("注册失败！");
+            logprint("注册失败！");
             lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "注册失败！", NULL, true);
             lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
             lv_obj_center(mbox1);
@@ -70,7 +70,7 @@ void login_ac_ev(lv_event_t * e)
 
 	if(Login_type){
 		//登录逻辑
-		printf("执行登录逻辑");
+		logprint("执行登录逻辑");
 		const char *user = lv_textarea_get_text(ui_inusername);
         const char *pass = lv_textarea_get_text(ui_inpassword);
         if(strcmp(user,"")==0||strcmp(pass,"")==0){
@@ -80,7 +80,7 @@ void login_ac_ev(lv_event_t * e)
             return;
         }
         if(loginMenu(user,pass)!=-1){
-            printf("登录成功！");
+            logprint("登录成功！");
             lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "登录成功！", NULL, true);
             lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
             lv_obj_center(mbox1);
@@ -91,7 +91,7 @@ void login_ac_ev(lv_event_t * e)
             // lv_obj_add_flag(superior, LV_OBJ_FLAG_HIDDEN);
 
         }else{
-            printf("登录失败！");
+            logprint("登录失败！");
             lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "登录失败！账号密码不正确或账号已被停用", NULL, true);
             lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
             lv_obj_center(mbox1);
@@ -120,7 +120,7 @@ void viewOutLogin(lv_event_t * e)
 void anonymouslogin(lv_event_t * e)
 {
     if(loginMenu("anonymous","anonymous")!=-1){
-        printf("登录成功！");
+        logprint("登录成功！");
         lv_textarea_set_text(ui_inusername,"");
         lv_textarea_set_text(ui_inpassword,"");
         lv_textarea_set_text(ui_intopassword,"");
@@ -128,7 +128,7 @@ void anonymouslogin(lv_event_t * e)
         // lv_obj_add_flag(superior, LV_OBJ_FLAG_HIDDEN);
 
     }else{
-        printf("登录失败！");
+        logprint("登录失败！");
         lv_obj_t * mbox1 = lv_msgbox_create(NULL, "提示", "登录失败！管理员关闭了匿名登录", NULL, true);
         lv_obj_set_style_text_font(mbox1,&ui_font_harmonyOS,0);
         lv_obj_center(mbox1);
@@ -146,9 +146,9 @@ void OpenLoginView(lv_event_t * e)
 void filesinit(lv_event_t * e)
 {
     if(check_username("admin")){
-        printf("账号信息初始完成！\n");
+        logprint("账号信息初始完成！\n");
     }
     if(OrderInit()){
-        printf("菜单数据初始完成！\n");
+        logprint("菜单数据初始完成！\n");
     }
 }

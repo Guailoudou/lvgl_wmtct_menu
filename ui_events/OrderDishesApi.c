@@ -67,7 +67,7 @@ char *getMenuList(char pagestr[],int pages,int type) //写入menuData
     pages %= maxpages+1; 
     if(pages<=0)pages=1;
     char buf[20];
-    printf("len=%d,maxp=%d,np=%d\n",len,maxpages,pages);
+    logprint("len=%d,maxp=%d,np=%d\n",len,maxpages,pages);
     sprintf(buf,"%d/%d",pages,maxpages);
     strcpy(pagestr,buf);
     int head = (pages-1)*8;
@@ -88,13 +88,13 @@ char *getMenuList(char pagestr[],int pages,int type) //写入menuData
         if(p->data.data.type<=type){
             menuData[data_i++] = p->data.data;
             inventoryBoard[p->data.data.uid] = p->data.data.inventory;
-            printf("%s ",p->data.data.name);
+            logprint("%s ",p->data.data.name);
         }
         if(data_i==8){
             break;
         }
     }
-    printf("\n");
+    logprint("\n");
     return pagestr;
 }
 
@@ -117,7 +117,7 @@ bool addChoppBoard(int dishesUid,bool isplus)
                 rmChoppBoard(dishesUid);
             }
             for(int i=0;i<board.len;i++){
-                printf("当前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
+                logprint("当前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
             }
             return inventory;
         }
@@ -126,7 +126,7 @@ bool addChoppBoard(int dishesUid,bool isplus)
     board.dishesUids[board.len].dishesUids = dishesUid;
     board.dishesUids[board.len++].num = 1;
     for(int i=0;i<board.len;i++){
-        printf("当前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
+        logprint("当前菜板：uid=%d num=%d\n",board.dishesUids[i].dishesUids,board.dishesUids[i].num);
     }
     return inventory;
 }
@@ -193,7 +193,7 @@ static Dlist create_head()
     Dlist head = malloc(sizeof(struct DishesList));
     if (head == NULL)
     {
-        printf("head failed\n");
+        logprint("head failed\n");
         return NULL;
     }
     else
@@ -207,7 +207,7 @@ static Dlist create_node(DishesData data)
     Dlist node = malloc(sizeof(struct DishesList));
     if (node == NULL)
     {
-        printf("node failed\n");
+        logprint("node failed\n");
         return NULL;
     }
     else

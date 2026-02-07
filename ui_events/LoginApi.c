@@ -40,7 +40,7 @@ static void readtxt(){
 // void display(userdata *users){
 //     for (int i = 0; i < users->len; i++)
 //     {
-//         printf("账号：%s\t密码：%s\n",userList[i].name,userList[i].passwd);
+//         logprint("账号：%s\t密码：%s\n",userList[i].name,userList[i].passwd);
 //     }
 // }
 static void writetxt(){
@@ -90,7 +90,7 @@ int loginMenu(const char *iuser,const char *ipass){
     {
         char *user = p->data.data.name;
         char *pass = p->data.data.password;
-        printf("校验读取：%s %s\n",user,pass);
+        logprint("校验读取：%s %s\n",user,pass);
         if(strcmp(user,iuser)==0 && strcmp(pass,ipass)==0){
             strcpy(loginUser.name,user);
             strcpy(loginUser.password,pass);
@@ -113,7 +113,7 @@ bool regMenu(const char *iuser,const char *ipass){
     // if(user_data==NULL)
     //     user_data = readtxt();
     // int len = user_data->len;
-    printf("注册传入:%s %s\n",iuser,ipass);
+    logprint("注册传入:%s %s\n",iuser,ipass);
     int uid = getMaxUid(userhead);
     Ulist newnode = create_node(create_data(++uid,iuser,ipass,1));
     list_add_tail(&newnode->my,&userhead->my);
@@ -177,7 +177,7 @@ static Ulist create_head()
     Ulist head = malloc(sizeof(struct UserList));
     if (head == NULL)
     {
-        printf("head failed\n");
+        logprint("head failed\n");
         return NULL;
     }
     else
@@ -191,7 +191,7 @@ static Ulist create_node(UserData data)
     Ulist node = malloc(sizeof(struct UserList));
     if (node == NULL)
     {
-        printf("node failed\n");
+        logprint("node failed\n");
         return NULL;
     }
     else
