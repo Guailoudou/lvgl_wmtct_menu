@@ -1,5 +1,0 @@
-1 userr 123 0
-2 user 123 0
-3 vip 123 1
-4 admin 123 2
-5 anonymous anonymous 0
