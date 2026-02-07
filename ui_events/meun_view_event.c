@@ -5,6 +5,7 @@
 int pages = 1;
 int coinNum = 0;
 int Sum = 0;
+bool lookinfo = false;
 extern userInfo loginUser;
 void viewClearChopp(lv_event_t * e);
 void viewAddChopp(lv_event_t * e);
@@ -435,6 +436,10 @@ void viewAddChopp(lv_event_t * e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code != LV_EVENT_RELEASED)return;
+    if(lookinfo){
+        lookinfo = false;
+        return;
+    }
     printf("添加\n");
     // 遍历 target 的所有子对象
     uint32_t child_cnt = lv_obj_get_child_cnt(target);
@@ -446,6 +451,7 @@ void viewAddChopp(lv_event_t * e)
             const char * uid_str = lv_label_get_text(child);
             printf("Label text: %s\n", uid_str);
             if(strcmp(uid_str,"+")==0)continue;
+            if(strcmp(uid_str,"下单")==0)continue;
             int uid = atoi(uid_str);
             printf("intuid = %d\n",uid);
             for(int i=0;i<board.len;i++){
@@ -553,4 +559,36 @@ void replenishmentChopp(lv_event_t * e)
     forDillItem();
     initMeun(pages);
 
+}
+void viewAddInfo(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code != LV_EVENT_LONG_PRESSED)return;
+    printf("获取详细信息\n");
+    // 遍历 target 的所有子对象
+    uint32_t child_cnt = lv_obj_get_child_cnt(target);
+    for (uint32_t i = 0; i < child_cnt; i++) {
+        lv_obj_t * child = lv_obj_get_child(target, i);
+        // 检查该子对象是否是 label
+        if (lv_obj_check_type(child, &lv_label_class)) {
+            // 找到了 label！
+            const char * uid_str = lv_label_get_text(child);
+            printf("Label text: %s\n", uid_str);
+            int uid = atoi(uid_str);
+            printf("intuid = %d\n",uid);
+            dishesItem info = getDishesInfo(uid);
+            char buf[1024] = {0};
+            sprintf(buf,"%s\n￥%d\n库存：%d\n%s",info.name,
+                info.peice,info.inventory,
+                info.type>=1?"VIP特供":"");
+            lv_label_set_text(ui_infoName,buf);
+            lv_label_set_text(ui_infoUid,uid_str);
+            lv_label_set_text(ui_infomsg,info.description);
+            printf("描述：%s\n",info.description);
+            lv_img_set_src(ui_infoImage,info.imgPath);
+            lookinfo = true;
+            break; // 如果只需要第一个 label，可以 break
+        }
+    }
 }

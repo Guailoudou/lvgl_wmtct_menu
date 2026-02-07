@@ -9,6 +9,7 @@ SET(SOURCES screens/ui_HelloView.c
     images/ui_img_yuanloading_png.c
     images/ui_img_1371183408.c
     images/ui_img_xtq_img_png.c
+    images/ui_img_caipinginfo_png.c
     fonts/ui_font_harmonyOS.c
     fonts/ui_font_harmonyOSTitle.c)
 

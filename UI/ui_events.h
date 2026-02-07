@@ -19,6 +19,7 @@ void viewNextPage(lv_event_t * e);
 void viewLaftPage(lv_event_t * e);
 void viewMenuInit(lv_event_t * e);
 void viewAddChopp(lv_event_t * e);
+void viewAddInfo(lv_event_t * e);
 void viewOutLogin(lv_event_t * e);
 void viewAdminInit(lv_event_t * e);
 

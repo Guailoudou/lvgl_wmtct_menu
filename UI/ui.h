@@ -121,6 +121,21 @@ void ui_event_OpenAdminBtn(lv_event_t * e);
 extern lv_obj_t * ui_OpenAdminBtn;
 extern lv_obj_t * ui_OpenAdminBtnText;
 extern lv_obj_t * ui_Loading;
+extern lv_obj_t * ui_Info;
+extern lv_obj_t * ui_Container4;
+extern lv_obj_t * ui_Container6;
+extern lv_obj_t * ui_infoImage;
+extern lv_obj_t * ui_infoName;
+extern lv_obj_t * ui_Container5;
+extern lv_obj_t * ui_Container7;
+void ui_event_infobackbtn(lv_event_t * e);
+extern lv_obj_t * ui_infobackbtn;
+extern lv_obj_t * ui_Container8;
+extern lv_obj_t * ui_infomsg;
+void ui_event_Button3(lv_event_t * e);
+extern lv_obj_t * ui_Button3;
+extern lv_obj_t * ui_infoUid;
+extern lv_obj_t * ui_Label12;
 // SCREEN: ui_AdminView
 void ui_AdminView_screen_init(void);
 void ui_event_AdminView(lv_event_t * e);
@@ -151,6 +166,7 @@ LV_IMG_DECLARE(ui_img_loginback_png);    // assets/loginback.png
 LV_IMG_DECLARE(ui_img_yuanloading_png);    // assets/yuanloading.png
 LV_IMG_DECLARE(ui_img_1371183408);    // assets/背景.png
 LV_IMG_DECLARE(ui_img_xtq_img_png);    // assets/xtq_img.png
+LV_IMG_DECLARE(ui_img_caipinginfo_png);    // assets/caipinginfo.png
 
 
 

@@ -119,6 +119,21 @@ void ui_event_OpenAdminBtn(lv_event_t * e);
 lv_obj_t * ui_OpenAdminBtn;
 lv_obj_t * ui_OpenAdminBtnText;
 lv_obj_t * ui_Loading;
+lv_obj_t * ui_Info;
+lv_obj_t * ui_Container4;
+lv_obj_t * ui_Container6;
+lv_obj_t * ui_infoImage;
+lv_obj_t * ui_infoName;
+lv_obj_t * ui_Container5;
+lv_obj_t * ui_Container7;
+void ui_event_infobackbtn(lv_event_t * e);
+lv_obj_t * ui_infobackbtn;
+lv_obj_t * ui_Container8;
+lv_obj_t * ui_infomsg;
+void ui_event_Button3(lv_event_t * e);
+lv_obj_t * ui_Button3;
+lv_obj_t * ui_infoUid;
+lv_obj_t * ui_Label12;
 
 
 // SCREEN: ui_AdminView
@@ -390,6 +405,11 @@ void ui_event_menuButton1(lv_event_t * e)
     if(event_code == LV_EVENT_RELEASED) {
         viewAddChopp(e);
     }
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        viewAddInfo(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+    }
 }
 void ui_event_menuButton2(lv_event_t * e)
 {
@@ -397,6 +417,11 @@ void ui_event_menuButton2(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_RELEASED) {
         viewAddChopp(e);
+    }
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        viewAddInfo(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
     }
 }
 void ui_event_menuButton3(lv_event_t * e)
@@ -406,6 +431,11 @@ void ui_event_menuButton3(lv_event_t * e)
     if(event_code == LV_EVENT_RELEASED) {
         viewAddChopp(e);
     }
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        viewAddInfo(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+    }
 }
 void ui_event_menuButton4(lv_event_t * e)
 {
@@ -413,6 +443,11 @@ void ui_event_menuButton4(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_RELEASED) {
         viewAddChopp(e);
+    }
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        viewAddInfo(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
     }
 }
 void ui_event_menuButton5(lv_event_t * e)
@@ -422,6 +457,11 @@ void ui_event_menuButton5(lv_event_t * e)
     if(event_code == LV_EVENT_RELEASED) {
         viewAddChopp(e);
     }
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        viewAddInfo(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+    }
 }
 void ui_event_menuButton6(lv_event_t * e)
 {
@@ -429,6 +469,11 @@ void ui_event_menuButton6(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_RELEASED) {
         viewAddChopp(e);
+    }
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        viewAddInfo(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
     }
 }
 void ui_event_menuButton7(lv_event_t * e)
@@ -438,6 +483,11 @@ void ui_event_menuButton7(lv_event_t * e)
     if(event_code == LV_EVENT_RELEASED) {
         viewAddChopp(e);
     }
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        viewAddInfo(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+    }
 }
 void ui_event_menuButton8(lv_event_t * e)
 {
@@ -445,6 +495,11 @@ void ui_event_menuButton8(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_RELEASED) {
         viewAddChopp(e);
+    }
+    if(event_code == LV_EVENT_LONG_PRESSED) {
+        viewAddInfo(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
     }
 }
 void ui_event_OutLoginBtn(lv_event_t * e)
@@ -462,6 +517,23 @@ void ui_event_OpenAdminBtn(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_AdminView, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_AdminView_screen_init);
+    }
+}
+void ui_event_infobackbtn(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_RELEASED) {
+        _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+    }
+}
+void ui_event_Button3(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_RELEASED) {
+        viewAddChopp(e);
+        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
     }
 }
 void ui_event_AdminView(lv_event_t * e)

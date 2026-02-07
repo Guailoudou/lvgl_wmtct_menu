@@ -2,7 +2,7 @@
 extern userInfo loginUser;
 static Dlist create_head();
 static Dlist create_node(DishesData data);
-static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type,int inventory);
+static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type,int inventory,char description[]);
 static int getListLen(Dlist head,int type); //获取长度
 static int getMaxUid(Dlist head);   //  获取目前的uid最大值
 //////////////////////文件操作///////////////////////////////
@@ -12,7 +12,7 @@ static void readtxt(){
     }
     // FILE *fp = openfile(USERINFOFILE,"r");
     FILE *fp = openfile(USERINFOFILE,"r");
-    char buf[100] = {0};
+    char buf[2048] = {0};
     int i = 0;
     if(fp!=NULL){
         while(fgets(buf,sizeof(buf),fp) != NULL){
@@ -20,8 +20,9 @@ static void readtxt(){
             char name[32] = {0};
             int peice,type,inventory;
             char imgPath[1024] = {0};
-            sscanf(buf,"%d %s %s %d %d %d",&uid,imgPath,name,&peice,&type,&inventory);
-            Dlist newnode = create_node(create_data(uid,imgPath,name,peice,type,inventory));
+            char description[1024] = {0};
+            sscanf(buf,"%d %s %s %d %d %d %s",&uid,imgPath,name,&peice,&type,&inventory,description);
+            Dlist newnode = create_node(create_data(uid,imgPath,name,peice,type,inventory,description));
             list_add_tail(&newnode->my,&dishesHead->my);
             memset(buf,0,sizeof(buf));
         }
@@ -43,9 +44,9 @@ static void writetxt(){
     //从头结点到末尾进行遍历  安全遍历
     list_for_each_entry_safe(p,n,&(dishesHead->my),my)
     {
-        fprintf(fp,"%d %s %s %d %d %d\n",p->data.data.uid,p->data.data.imgPath,
+        fprintf(fp,"%d %s %s %d %d %d %s\n",p->data.data.uid,p->data.data.imgPath,
             p->data.data.name,p->data.data.peice,
-            p->data.data.type,p->data.data.inventory);
+            p->data.data.type,p->data.data.inventory,p->data.data.description);
     }
 
     closefile(fp);
@@ -213,7 +214,7 @@ static Dlist create_node(DishesData data)
     }
 }
 
-static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type,int inventory){
+static DishesData create_data(int uid,char imgPath[],char name[],int peice,int type,int inventory,char description[]){
     DishesData data = {
         // .data.name = name,
         // .data.imgPath=imgPath,
@@ -224,6 +225,7 @@ static DishesData create_data(int uid,char imgPath[],char name[],int peice,int t
     };
     strcpy(data.data.name,name);
     strcpy(data.data.imgPath,imgPath);
+    strcpy(data.data.description,description);
     return data;
 }
 
