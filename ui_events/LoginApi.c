@@ -2,7 +2,7 @@
 
 static void readtxt();//读取数据
 static void writetxt(); //写入数据
-static bool check_username(const char *iuser);//检查用户名是否重复
+bool check_username(const char *iuser);//检查用户名是否重复
 
 ////////////////////////////链表操作//////////////////////////
 static Ulist create_head();
@@ -62,7 +62,7 @@ static void writetxt(){
 
     closefile(fp);
 }
-static bool check_username(const char *iuser){
+bool check_username(const char *iuser){
     if(userhead==NULL){
         userhead = create_head();
         readtxt();

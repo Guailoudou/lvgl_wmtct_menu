@@ -53,9 +53,13 @@ static void writetxt(){
 }
 
 ////////////////////////API/////////////////////
+bool OrderInit(){
+    if(dishesHead==NULL)readtxt();
+    return true;
+}
 char *getMenuList(char pagestr[],int pages,int type) //写入menuData
 {
-    if(dishesHead==NULL)readtxt();
+    
     int len = getListLen(dishesHead,type);
     maxpages = (len/8) + (len%8==0?0:1);
     if(pages>=maxpages)isEnd=true;  //判断末页

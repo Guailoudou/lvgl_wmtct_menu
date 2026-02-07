@@ -7,6 +7,8 @@
 #include "../UI/ui.h"
 #include <stdio.h>
 bool Login_type = true;
+extern bool check_username(const char *iuser);
+extern bool OrderInit();
 void reg_ac_ev(lv_event_t * e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
@@ -140,4 +142,13 @@ void OpenLoginView(lv_event_t * e)
 {
     lv_timer_t *ltimes = lv_timer_create(OpenLoginView_timer_callback, 8600, NULL);
     lv_timer_set_repeat_count(ltimes, 1);
+}
+void filesinit(lv_event_t * e)
+{
+    if(check_username("admin")){
+        printf("账号信息初始完成！\n");
+    }
+    if(OrderInit()){
+        printf("菜单数据初始完成！\n");
+    }
 }

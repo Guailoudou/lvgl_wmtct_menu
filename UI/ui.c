@@ -293,6 +293,7 @@ void ui_event_HelloView(lv_event_t * e)
         yuanloading_Animation(ui_Container2, 0);
         OpenLoginView(e);
         yuanloading2_Animation(ui_Container2, 0);
+        filesinit(e);
     }
 }
 void ui_event_LoginView(lv_event_t * e)
