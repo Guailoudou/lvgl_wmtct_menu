@@ -403,10 +403,23 @@ void viewMenuInit(lv_event_t * e)
     
     forDillItem();
     initMeun(pages);
-    if(loginUser.type<=1)
+    lv_obj_add_flag(ui_Info,LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(ui_Keyboard2,LV_OBJ_FLAG_HIDDEN);
+    if(loginUser.type<=1){
         lv_obj_add_flag(ui_OpenAdminBtn,LV_OBJ_FLAG_HIDDEN);
-    else
+        lv_obj_add_flag(ui_Label9,LV_OBJ_FLAG_HIDDEN);
+        lv_obj_add_flag(ui_EditCoinTextArea,LV_OBJ_FLAG_HIDDEN);
+        lv_label_set_text(ui_infoBtnText,"下单");
+    }
+        
+    else{
         lv_obj_clear_flag(ui_OpenAdminBtn,LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(ui_Label9,LV_OBJ_FLAG_HIDDEN);
+        lv_obj_clear_flag(ui_EditCoinTextArea,LV_OBJ_FLAG_HIDDEN);
+        lv_label_set_text(ui_infoBtnText,"保存");
+    }
+    
+        
     _ui_basic_set_property(ui_Bill, _UI_BASIC_PROPERTY_POSITION_Y,  460);
     // lv_obj_add_flag(ui_Loading,LV_OBJ_FLAG_HIDDEN);
 }
@@ -527,7 +540,7 @@ void checkoutChopp(lv_event_t * e)
     forDillItem();
     initMeun(pages);
 }
-
+//补货
 void replenishmentChopp(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -559,6 +572,21 @@ void replenishmentChopp(lv_event_t * e)
     initMeun(pages);
 
 }
+void creatInfo(dishesItem info){
+    char buf[1024] = {0};
+    sprintf(buf,"%s\n￥%d\n库存：%d\n%s",info.name,
+        info.peice,info.inventory,
+        info.type>=1?"VIP特供":"");
+    lv_label_set_text(ui_infoName,buf);
+    sprintf(buf,"%d",info.uid);
+    lv_label_set_text(ui_infoUid,buf);
+    lv_label_set_text(ui_infomsg,info.description);
+    sprintf(buf,"%d",info.peice);
+    lv_textarea_set_text(ui_EditCoinTextArea,buf);
+    logprint("描述：%s\n",info.description);
+    lv_img_set_src(ui_infoImage,info.imgPath);
+}
+//显示详细信息
 void viewAddInfo(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -577,17 +605,53 @@ void viewAddInfo(lv_event_t * e)
             int uid = atoi(uid_str);
             logprint("intuid = %d\n",uid);
             dishesItem info = getDishesInfo(uid);
-            char buf[1024] = {0};
-            sprintf(buf,"%s\n￥%d\n库存：%d\n%s",info.name,
-                info.peice,info.inventory,
-                info.type>=1?"VIP特供":"");
-            lv_label_set_text(ui_infoName,buf);
-            lv_label_set_text(ui_infoUid,uid_str);
-            lv_label_set_text(ui_infomsg,info.description);
-            logprint("描述：%s\n",info.description);
-            lv_img_set_src(ui_infoImage,info.imgPath);
+            creatInfo(info);
             lookinfo = true;
             break; // 如果只需要第一个 label，可以 break
         }
+    }
+}
+
+void infoBtnac(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_RELEASED) {
+        if(loginUser.type<=1){
+            viewAddChopp(e);
+            _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+        }
+        else{
+             // 遍历 target 的所有子对象
+            uint32_t child_cnt = lv_obj_get_child_cnt(target);
+            for (uint32_t i = 0; i < child_cnt; i++) {
+                lv_obj_t * child = lv_obj_get_child(target, i);
+                // 检查该子对象是否是 label
+                if (lv_obj_check_type(child, &lv_label_class)) {
+                    // 找到了 label！
+                    const char * uid_str = lv_label_get_text(child);
+                    logprint("Label text: %s\n", uid_str);
+                    if(strcmp(uid_str,"保存")==0)continue;
+                    int uid = atoi(uid_str);
+                    logprint("intuid = %d\n",uid);
+                    const char *peice_str = lv_textarea_get_text(ui_EditCoinTextArea);
+                    int peice = atoi(peice_str);
+                    if(editCoin(uid,peice)){
+                        lv_obj_t *mbox11 = lv_msgbox_create(NULL, "提示", "价格修改成功！", NULL, true);
+                        lv_obj_set_style_text_font(mbox11,&ui_font_harmonyOS,0);
+                        lv_obj_center(mbox11);
+                        dishesItem info = getDishesInfo(uid);
+                        creatInfo(info);
+                        initMeun(pages);
+                    }
+
+                    break; // 如果只需要第一个 label，可以 break
+                }
+            }
+            
+        }
+    
+
+    
     }
 }

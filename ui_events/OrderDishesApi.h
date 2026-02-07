@@ -21,6 +21,6 @@ bool rmChoppBoard(int dishesUid);   //删除
 bool addChoppBoard(int dishesUid,bool isplus); //添加到菜单
 bool checkout();    //结账 清除库存
 bool replenishment();  //补货 添加库存
-
+bool editCoin(int uid,int peice); //修改价格
 
 #endif

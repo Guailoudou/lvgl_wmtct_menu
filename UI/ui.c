@@ -119,6 +119,7 @@ void ui_event_OpenAdminBtn(lv_event_t * e);
 lv_obj_t * ui_OpenAdminBtn;
 lv_obj_t * ui_OpenAdminBtnText;
 lv_obj_t * ui_Loading;
+void ui_event_Info(lv_event_t * e);
 lv_obj_t * ui_Info;
 lv_obj_t * ui_Container4;
 lv_obj_t * ui_Container6;
@@ -130,10 +131,15 @@ void ui_event_infobackbtn(lv_event_t * e);
 lv_obj_t * ui_infobackbtn;
 lv_obj_t * ui_Container8;
 lv_obj_t * ui_infomsg;
+lv_obj_t * ui_Container9;
+lv_obj_t * ui_Label9;
+void ui_event_EditCoinTextArea(lv_event_t * e);
+lv_obj_t * ui_EditCoinTextArea;
 void ui_event_Button3(lv_event_t * e);
 lv_obj_t * ui_Button3;
 lv_obj_t * ui_infoUid;
-lv_obj_t * ui_Label12;
+lv_obj_t * ui_infoBtnText;
+lv_obj_t * ui_Keyboard2;
 
 
 // SCREEN: ui_AdminView
@@ -520,6 +526,14 @@ void ui_event_OpenAdminBtn(lv_event_t * e)
         _ui_screen_change(&ui_AdminView, LV_SCR_LOAD_ANIM_FADE_ON, 200, 0, &ui_AdminView_screen_init);
     }
 }
+void ui_event_Info(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_RELEASED) {
+        _ui_flag_modify(ui_Keyboard2, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+    }
+}
 void ui_event_infobackbtn(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -528,13 +542,20 @@ void ui_event_infobackbtn(lv_event_t * e)
         _ui_flag_modify(ui_Info, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
     }
 }
+void ui_event_EditCoinTextArea(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t * target = lv_event_get_target(e);
+    if(event_code == LV_EVENT_RELEASED) {
+        _ui_flag_modify(ui_Keyboard2, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+    }
+}
 void ui_event_Button3(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_RELEASED) {
-        viewAddChopp(e);
-        _ui_flag_modify(ui_Button3, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+        infoBtnac(e);
     }
 }
 void ui_event_AdminView(lv_event_t * e)

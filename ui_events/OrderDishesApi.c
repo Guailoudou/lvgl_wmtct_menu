@@ -187,6 +187,20 @@ bool replenishment()
     }
     writetxt();
 }
+bool editCoin(int uid,int peice)
+{
+    Dlist p=NULL,n=NULL;
+    //从头结点到末尾进行遍历  安全遍历
+    list_for_each_entry_safe(p,n,&(dishesHead->my),my)
+    {
+        if(p->data.data.uid==uid){
+            p->data.data.peice = peice;
+            writetxt();
+            return true;
+        }
+    }
+    return false;
+}
 ////////////////////////////链表操作//////////////////////////
 static Dlist create_head()
 {

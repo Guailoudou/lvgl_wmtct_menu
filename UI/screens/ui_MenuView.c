@@ -476,7 +476,7 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_align(ui_Info, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Info, LV_FLEX_FLOW_ROW);
     lv_obj_set_flex_align(ui_Info, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Info, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_FLOATING);     /// Flags
+    lv_obj_add_flag(ui_Info, LV_OBJ_FLAG_FLOATING);     /// Flags
     lv_obj_clear_flag(ui_Info, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_Info, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Info, 100, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -569,7 +569,35 @@ void ui_MenuView_screen_init(void)
     lv_obj_set_style_text_opa(ui_infomsg, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_infomsg, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Button3 = lv_btn_create(ui_Container8);
+    ui_Container9 = lv_obj_create(ui_Container8);
+    lv_obj_remove_style_all(ui_Container9);
+    lv_obj_set_width(ui_Container9, 468);
+    lv_obj_set_height(ui_Container9, 50);
+    lv_obj_set_align(ui_Container9, LV_ALIGN_CENTER);
+    lv_obj_set_flex_flow(ui_Container9, LV_FLEX_FLOW_ROW);
+    lv_obj_set_flex_align(ui_Container9, LV_FLEX_ALIGN_SPACE_EVENLY, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+    lv_obj_clear_flag(ui_Container9, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+
+    ui_Label9 = lv_label_create(ui_Container9);
+    lv_obj_set_width(ui_Label9, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label9, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Label9, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label9, "价格：");
+    lv_obj_set_style_text_color(ui_Label9, lv_color_hex(0x241F14), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Label9, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Label9, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_EditCoinTextArea = lv_textarea_create(ui_Container9);
+    lv_obj_set_width(ui_EditCoinTextArea, 150);
+    lv_obj_set_height(ui_EditCoinTextArea, LV_SIZE_CONTENT);    /// 46
+    lv_obj_set_align(ui_EditCoinTextArea, LV_ALIGN_CENTER);
+    lv_textarea_set_text(ui_EditCoinTextArea, "123");
+    lv_textarea_set_placeholder_text(ui_EditCoinTextArea, "668");
+    lv_textarea_set_one_line(ui_EditCoinTextArea, true);
+
+
+
+    ui_Button3 = lv_btn_create(ui_Container9);
     lv_obj_set_width(ui_Button3, 124);
     lv_obj_set_height(ui_Button3, 45);
     lv_obj_set_align(ui_Button3, LV_ALIGN_CENTER);
@@ -585,12 +613,23 @@ void ui_MenuView_screen_init(void)
     lv_label_set_text(ui_infoUid, "1");
     lv_obj_add_flag(ui_infoUid, LV_OBJ_FLAG_HIDDEN);     /// Flags
 
-    ui_Label12 = lv_label_create(ui_Button3);
-    lv_obj_set_width(ui_Label12, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label12, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label12, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label12, "下单");
-    lv_obj_set_style_text_font(ui_Label12, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_infoBtnText = lv_label_create(ui_Button3);
+    lv_obj_set_width(ui_infoBtnText, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_infoBtnText, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_infoBtnText, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_infoBtnText, "下单");
+    lv_obj_set_style_text_font(ui_infoBtnText, &ui_font_harmonyOS, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Keyboard2 = lv_keyboard_create(ui_Info);
+    lv_keyboard_set_mode(ui_Keyboard2, LV_KEYBOARD_MODE_NUMBER);
+    lv_obj_set_width(ui_Keyboard2, 434);
+    lv_obj_set_height(ui_Keyboard2, 229);
+    lv_obj_set_x(ui_Keyboard2, -289);
+    lv_obj_set_y(ui_Keyboard2, 181);
+    lv_obj_set_align(ui_Keyboard2, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Keyboard2, LV_OBJ_FLAG_FLOATING);     /// Flags
+    lv_obj_set_style_bg_color(ui_Keyboard2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Keyboard2, 150, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_menuButton1, ui_event_menuButton1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_menuButton2, ui_event_menuButton2, LV_EVENT_ALL, NULL);
@@ -603,7 +642,10 @@ void ui_MenuView_screen_init(void)
     lv_obj_add_event_cb(ui_OutLoginBtn, ui_event_OutLoginBtn, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_OpenAdminBtn, ui_event_OpenAdminBtn, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_infobackbtn, ui_event_infobackbtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_EditCoinTextArea, ui_event_EditCoinTextArea, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button3, ui_event_Button3, LV_EVENT_ALL, NULL);
+    lv_keyboard_set_textarea(ui_Keyboard2, ui_EditCoinTextArea);
+    lv_obj_add_event_cb(ui_Info, ui_event_Info, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_MenuView, ui_event_MenuView, LV_EVENT_ALL, NULL);
 
 }
